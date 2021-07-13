@@ -16,6 +16,14 @@ module.exports = {
         DEFAULT: '#F22E2E',
         dark: '#D91A3D'
       }
+    },
+    container: {
+      padding: {
+        DEFAULT: '1rem',
+        sm: '2rem',
+        lg: '4rem',
+        xl: '5rem',
+      },
     }
   },
   variants: {
