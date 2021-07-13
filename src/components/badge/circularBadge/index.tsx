@@ -1,6 +1,5 @@
 import React from 'react'
 import Tooltip from '@material-ui/core/Tooltip'
-import { Theme, makeStyles } from '@material-ui/core/styles'
 
 interface CircularBadgeProps {
     src: string
