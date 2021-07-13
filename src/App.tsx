@@ -11,7 +11,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>Hello Vite + React!</p>
         <p>
-          <button className="border border-gray-400" type="button" onClick={() => setCount((count) => count + 1)}>
+          <button className="border-4 border-red-dark" type="button" onClick={() => setCount((count) => count + 1)}>
             count is: {count}
           </button>
         </p>
