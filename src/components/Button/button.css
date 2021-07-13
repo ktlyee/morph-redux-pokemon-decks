@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.button {
+    @apply inline-flex items-center font-medium rounded-md shadow-sm cursor-pointer focus:outline-none
+}
+
+.button-small {
+    @apply px-3 py-2 text-sm leading-4
+}
+
+.button-medium {
+    @apply px-4 py-2 text-sm
+}
+
+.button-large {
+    @apply px-4 py-2 text-base
+}
+
+.icon-small {
+    @apply -ml-0.5 mr-2 h-4 w-4
+}
+
+.icon-medium {
+    @apply -ml-1 mr-2 h-5 w-5
+}
+
+.icon-large {
+    @apply -ml-1 mr-3 h-5 w-5
+}
