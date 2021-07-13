@@ -9,13 +9,13 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
+        <p className="font-press-start">Hello Vite + React!</p>
         <p>
-          <button className="border-4 border-red-dark" type="button" onClick={() => setCount((count) => count + 1)}>
+          <button className="border-4 border-red-dark font-quicksand" type="button" onClick={() => setCount((count) => count + 1)}>
             count is: {count}
           </button>
         </p>
-        <p>
+        <p className="font-quicksand">
           Edit <code>App.tsx</code> and save to test HMR updates.
         </p>
         <p>
