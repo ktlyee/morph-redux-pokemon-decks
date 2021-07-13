@@ -11,7 +11,7 @@ const BasicBadge = ({
     textStyle,
     backgroundColor
 }: BasicBadgeProps) => (
-    <span className={`inline-flex items-center px-5 py-1.5 rounded-full ${textStyle} ${backgroundColor}`}>
+    <span className={`inline-flex items-center px-5 py-1.5 rounded-full shadow-md ${textStyle} ${backgroundColor}`}>
         {text}
     </span>
 )
