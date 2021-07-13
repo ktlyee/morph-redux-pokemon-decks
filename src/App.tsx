@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { Avatar } from "./components";
+import { MailIcon, QuestionMarkCircleIcon } from '@heroicons/react/solid'
+import { Avatar, InputWithChild } from "./components";
+import { TestComponent } from "./testComponents"
 
 function App() {
   const [count, setCount] = useState(0);
@@ -16,19 +18,17 @@ function App() {
           text={{ text: "@pokemon", textColor: "text-blue font-bold" }}
         />
       </div>
+      <TestComponent/>
       <header className="App-header">
         <p className="font-press-start text-blue-dark">Hello Vite + React!</p>
         <p>
           <button
-            className="border-4 border-red-dark font-quicksand text-blue-dark"
+            className="p-3 rounded-3xl border-4 border-red-dark font-quicksand text-blue-dark"
             type="button"
             onClick={() => setCount((count) => count + 1)}
           >
             count is: {count}
           </button>
-        </p>
-        <p className="font-quicksand text-blue-dark">
-          Edit <code>App.tsx</code> and save to test HMR updates.
         </p>
         <p className="font-press-start">
           <a
@@ -54,4 +54,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
