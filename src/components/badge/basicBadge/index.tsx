@@ -1,19 +1,19 @@
 import React from 'react'
 
-interface BadgeProps {
+interface BasicBadgeProps {
     text: string
     textStyle: string
     backgroundColor: string
 }
 
-const Badge = ({
+const BasicBadge = ({
     text,
     textStyle,
     backgroundColor
-}: BadgeProps) => (
+}: BasicBadgeProps) => (
     <span className={`inline-flex items-center px-5 py-1.5 rounded-full ${textStyle} ${backgroundColor}`}>
         {text}
     </span>
 )
 
-export default Badge
+export default BasicBadge
