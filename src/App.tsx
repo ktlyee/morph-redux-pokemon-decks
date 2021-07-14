@@ -46,16 +46,7 @@ function App() {
             Vite Docs
           </a>
         </p>
-      </header> */}
-      <Pagination
-        pages={[
-          { pageNumber: 1, href: '#' },
-          { pageNumber: 2, href: '#' },
-          { pageNumber: 3, href: '#' },
-          { pageNumber: 4, href: '#' },
-          { pageNumber: 5, href: '#' },
-        ]}
-      />
+      </header>
     </div>
   );
 }
