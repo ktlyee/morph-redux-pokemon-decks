@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { MailIcon, QuestionMarkCircleIcon } from "@heroicons/react/solid";
-import { Avatar, InputWithChild, Toggle } from "./components";
+import { Avatar, InputWithChild, Toggle, CardShow } from "./components";
 
 const TestComponent = () => {
   const [enabled, setEnabled] = useState(false)
@@ -53,6 +53,9 @@ const TestComponent = () => {
             }
           />
         </div>
+      </div>
+      <div className="p-10">
+        <CardShow/>
       </div>
     </>
   );
