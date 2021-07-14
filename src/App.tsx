@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { MailIcon, QuestionMarkCircleIcon } from '@heroicons/react/solid'
-import { Avatar, InputWithChild } from "./components";
 import { TestComponent } from "./testComponents"
 
 function App() {
@@ -10,14 +8,6 @@ function App() {
 
   return (
     <div className="App">
-      <div className="p-5 bg-white grid justify-end">
-        <Avatar
-          href="#"
-          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-          name={{ text: "Welcome!", textColor: "text-blue font-bold" }}
-          text={{ text: "@pokemon", textColor: "text-blue font-bold" }}
-        />
-      </div>
       <TestComponent/>
       <header className="App-header">
         <p className="font-press-start text-blue-dark">Hello Vite + React!</p>
@@ -30,6 +20,7 @@ function App() {
             count is: {count}
           </button>
         </p>
+        
         <p className="font-press-start">
           <a
             className="App-link"
@@ -54,4 +45,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
