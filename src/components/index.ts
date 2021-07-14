@@ -11,3 +11,5 @@ export { default as Pagination } from './Pagination'
 export { default as Toggle } from './Toggle'
 
 export { default as InputWithChild } from './Input'
+
+export { default as InfoCard } from './Card/InfoCard'
