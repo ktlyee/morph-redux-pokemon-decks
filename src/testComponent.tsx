@@ -2,6 +2,25 @@ import React, { useState } from "react";
 import { MailIcon, QuestionMarkCircleIcon } from "@heroicons/react/solid";
 import { Avatar, InputWithChild, Toggle, CardShow } from "./components";
 
+const pokemon = [
+  {
+    id: "1",
+    name: "Pokemon",
+    isFav: true,
+    imageUrl:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
+  },
+  // More people...
+];
+
+const goInfo = () => {
+  return console.log("click Info");
+}
+
+const clickFav = () => {
+  return console.log("click Fav");
+}
+
 const TestComponent = () => {
   const [enabled, setEnabled] = useState(false)
 
@@ -55,7 +74,7 @@ const TestComponent = () => {
         </div>
       </div>
       <div className="p-10">
-        <CardShow/>
+        <CardShow showData={pokemon} handleInfo={goInfo} handleFav={clickFav}/>
       </div>
     </>
   );
