@@ -10,7 +10,8 @@ function App() {
     <div className="App">
       <TestComponent/>
       <header className="App-header">
-        <p className="font-press-start text-blue-dark">Hello Vite + React!</p>
+        <img src={logo} className="App-logo" alt="logo" />
+        <p className="font-press-start">Hello Vite + React!</p>
         <p>
           <button
             className="p-3 rounded-3xl border-4 border-red-dark font-quicksand text-blue-dark"
@@ -30,7 +31,7 @@ function App() {
           >
             Learn React
           </a>
-          {" | "}
+          {' | '}
           <a
             className="App-link"
             href="https://vitejs.dev/guide/features.html"
@@ -45,4 +46,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
