@@ -1,7 +1,7 @@
 export { default as Avatar } from './avatar'
 
-export { default as Button } from './Button'
+export { default as Button } from './button'
 
-export { default as BasicBadge } from './Badge/BasicBadge'
+export { default as BasicBadge } from './badge/basicBadge'
 
-export { default as CircularBadge } from './Badge/CircularBadge'
+export { default as CircularBadge } from './badge/circularBadge'
