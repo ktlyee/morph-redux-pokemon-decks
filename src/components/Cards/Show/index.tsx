@@ -20,7 +20,7 @@ const CardShow = ({showData, handleInfo, handleFav}: CardShowProp) => {
       {showData.map((showData) => (
         <li
           key={showData.id}
-          className="col-span-1 flex flex-col text-center bg-white-smoke rounded-lg shadow"
+          className="col-span-1 flex flex-col text-center bg-white-smoke rounded-2xl shadow-lg"
         >
           <div>
             <div className="-mt-px flex">
