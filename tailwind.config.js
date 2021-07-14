@@ -18,9 +18,6 @@ module.exports = {
     },
     colors: {
       transparent: 'transparent',
-      white: {
-        DEFAULT: '#FFFFFF'
-      },
       yellow: {
         DEFAULT: '#FFCB05',
         light: '#F2E641'
@@ -37,6 +34,9 @@ module.exports = {
       white: {
         DEFAULT: '#ffffff',
         smoke: '#f5f5f5'
+      },
+      gray: {
+        light: '#F8FAFC'
       }
     }
   },
