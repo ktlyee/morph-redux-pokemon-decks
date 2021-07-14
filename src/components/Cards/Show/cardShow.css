@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.card-show {
+    @apply grid grid-cols-4 gap-6 place-items-center
+}
+
+.card-show:hover {
+    @apply hover:translate-x-5
+}
