@@ -33,8 +33,12 @@ module.exports = {
       red: {
         DEFAULT: '#F22E2E',
         dark: '#D91A3D'
+      },
+      white: {
+        DEFAULT: '#ffffff',
+        smoke: '#f5f5f5'
       }
-    },
+    }
   },
   variants: {
     extend: {},
