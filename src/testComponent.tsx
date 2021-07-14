@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { MailIcon, QuestionMarkCircleIcon } from "@heroicons/react/solid";
-import { Avatar, InputWithChild } from "./components";
+import { Avatar, InputWithChild, Toggle } from "./components";
 
 const TestComponent = () => {
+  const [enabled, setEnabled] = useState(false)
+
   return (
     <>
       <div className="p-5 bg-white grid justify-end">
@@ -12,6 +14,9 @@ const TestComponent = () => {
           name={{ text: "Welcome!", textColor: "text-blue font-bold" }}
           text={{ text: "@pokemon", textColor: "text-blue font-bold" }}
         />
+      </div>
+      <div className="p-5 grid justify-start">
+        <Toggle enabled={enabled} setEnabled={() => setEnabled(!enabled)}/>
       </div>
       <div className="p-3 flex items-center justify-center bg-white">
         <div className="w-full max-w-xs mx-auto">
