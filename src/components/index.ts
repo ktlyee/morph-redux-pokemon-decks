@@ -9,3 +9,5 @@ export { default as CircularBadge } from './Badge/CircularBadge'
 export { default as Pagination } from './Pagination'
 
 export { default as Toggle } from './Toggle'
+
+export { default as InputWithChild } from './Input'
