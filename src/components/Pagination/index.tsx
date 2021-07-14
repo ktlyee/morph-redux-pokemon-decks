@@ -4,6 +4,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
 interface IPage {
     pageNumber: number
     href: string
+    currentPage: boolean
 }
 
 interface ITextStyle {
@@ -11,15 +12,19 @@ interface ITextStyle {
     fontWeight?: string
     fontSize?: string
     hover?: string
-    focus?: string
 }
 
 interface PaginationProps {
     pages: IPage[]
     text: ITextStyle
     borderColor: string
+    activePage: string
     prevButton: () => void
     nextButton: () => void
+}
+
+function classNames(...classes: string[]) {
+    return classes.filter(Boolean).join(' ')
 }
 
 export const Pagination = ({
@@ -30,6 +35,7 @@ export const Pagination = ({
         fontSize: 'text-sm'
     },
     borderColor,
+    activePage,
     prevButton,
     nextButton
 }: PaginationProps) => {
@@ -50,7 +56,11 @@ export const Pagination = ({
                         <a
                             key={index}
                             href={page.href}
-                            className={`${text.textColor} ${text.hover} ${text.focus} border-transparent  border-t-2 pt-4 px-4 inline-flex items-center ${text.fontSize} ${text.fontWeight}`}   
+                            className={classNames(
+                                page.currentPage ? `${activePage}` : `${text.textColor} ${text.hover}`,
+                                `border-transparent border-t-2 pt-4 px-4 inline-flex items-center ${text.fontSize} ${text.fontWeight}`
+                            )}
+                            aria-current={page.currentPage ? 'page' : undefined}
                         >
                             {page.pageNumber}
                         </a>
