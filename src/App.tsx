@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { TestComponent } from "./testComponents"
-import { InfoCard } from './components'
+import InfoCardTest from './InfoCardTest'
 
 function App() {
   const [count, setCount] = useState(0);
@@ -43,7 +43,7 @@ function App() {
           </a>
         </p>
       </header> */}
-      <InfoCard />
+      <InfoCardTest />
     </div>
   );
 }
