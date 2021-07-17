@@ -7,7 +7,8 @@ module.exports = {
     extend: {
       fontFamily: {
         'press-start': ['"Press Start 2P"', 'cursive'],
-        'quicksand': ['"Quicksand"', 'sans-serif']
+        'quicksand': ['"Quicksand"', 'sans-serif'],
+        'vt323': ['"VT323"', 'monospace']
       },
       container: {
         padding: {
