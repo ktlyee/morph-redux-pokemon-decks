@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { MailIcon, QuestionMarkCircleIcon } from "@heroicons/react/solid";
 import { Avatar, InputWithChild, Toggle, CardShow } from "./components";
+import axios from "axios";
 
 const pokemon = [
   {
@@ -8,30 +9,40 @@ const pokemon = [
     name: "Pokemon1",
     isFav: true,
     imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png",
+    bgCard: 'bg-purple'
   },
   {
     id: "2",
     name: "Pokemon2",
     isFav: true,
     imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png",
+    bgCard: 'bg-purple'
   },
   {
     id: "3",
     name: "Pokemon3",
     isFav: false,
     imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png",
+    bgCard: 'bg-purple'
   },
   {
     id: "4",
     name: "Pokemon4",
     isFav: false,
     imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png",
+    bgCard: 'bg-purple'  
   },
 ];
+
+const handleClick = ({}) => {
+  axios.get("https://pokeapi.co/api/v2/pokemon/ditto").then((res) => {
+    console.log(res.data);
+  }) 
+}
 
 const goInfo = () => {
   return console.log("click Info");
@@ -96,6 +107,7 @@ const TestComponent = () => {
       <div className="p-10">
         <CardShow showData={pokemon} handleInfo={goInfo} handleFav={clickFav}/>
       </div>
+      <button className="h-10 w-20 text-white bg-blue-dark rounded-md hover:bg-blue-dark" onClick={handleClick}> Test this </button>
     </>
   );
 };
