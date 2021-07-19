@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .button {
-    @apply inline-flex items-center font-medium rounded-md shadow-sm cursor-pointer focus:outline-none
+    @apply inline-flex items-center font-medium shadow-sm cursor-pointer focus:outline-none
 }
 
 .button-small {
@@ -16,6 +16,10 @@
 
 .button-large {
     @apply px-4 py-2 text-base
+}
+
+.button-full {
+    @apply w-full px-4 py-2 flex justify-center
 }
 
 .icon-small {

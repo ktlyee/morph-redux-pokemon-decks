@@ -18,7 +18,7 @@ interface ButtonProps {
     borderColor?: string
     hoverButton?: string
     focusButton?: string
-    size?: 'small' | 'medium' | 'large'
+    size?: 'small' | 'medium' | 'large' | 'full'
     handleClick?: () => void
 }
 
@@ -26,6 +26,7 @@ const Button = ({
     text,
     buttonColor,
     icon,
+    borderColor,
     hoverButton,
     focusButton = 'focus:ring-transparent',
     size = 'medium',
@@ -34,7 +35,7 @@ const Button = ({
     <button
         type="button"
         onClick={handleClick}
-        className={`button button-${size} ${text.color} ${buttonColor} ${hoverButton} ${focusButton}`}
+        className={`button button-${size} ${text.color} ${borderColor} ${buttonColor} ${hoverButton} ${focusButton}`}
     >
         {
             icon !== undefined && 
