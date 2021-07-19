@@ -1,12 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { InputWithChild, Button } from '../components'
 
-interface ILogin {
-    email: string
-    password: string
-}
+function LoginPage() {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
-function LoginPage({ email, password }: ILogin) {
     return (
         <div className='min-h-screen bg-white-smoke flex-col justify-center py-12 sm:px-6 lg:px-8'>
             <div className='mt-16'>
