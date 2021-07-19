@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors')
+
 module.exports = {
   purge: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   darkMode: false, // or 'media' or 'class'
@@ -19,9 +21,6 @@ module.exports = {
     },
     colors: {
       transparent: 'transparent',
-      white: {
-        DEFAULT: '#FFFFFF'
-      },
       yellow: {
         DEFAULT: '#FFCB05',
         light: '#F2E641',
@@ -41,6 +40,7 @@ module.exports = {
         DEFAULT: '#ffffff',
         smoke: '#f5f5f5'
       },
+      gray: colors.coolGray,
       purple: {
         DEFAULT: '#d1c4e9'
       }

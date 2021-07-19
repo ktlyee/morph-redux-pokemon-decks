@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.text-topic {
+    @apply text-sm font-press-start
+}
+
+.text-detail {
+    @apply font-quicksand font-semibold text-sm
+}
+
+.base-stats-title {
+    @apply font-medium text-red
+}
+
+.base-stats-value {
+    @apply font-quicksand font-semibold text-sm text-gray-700
+}
