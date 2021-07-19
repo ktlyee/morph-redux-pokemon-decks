@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import { TestComponent } from "./testComponents"
 import Register from "./screens/register"
@@ -7,8 +6,6 @@ import { BrowserRouter, Route, Switch } from "react-router-dom"
 import { NavLink } from "react-router-dom"
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <BrowserRouter>
     <div className="App">

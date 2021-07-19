@@ -1,4 +1,5 @@
 import React from 'react'
+import './avatar.css'
 
 interface Istyle {
   text: string
@@ -18,11 +19,11 @@ const Avatar = ({href, src, name, text, alt}: AvatarTextProps) => {
     <a href={href} className="flex-shrink-0 group block">
       <div className="flex items-center">
         <div className="mr-3">
-          <p className={`text-2xl font-quicksand m-0 ${text.textColor}`}>{name.text}</p>
-          <p className={`text-xl font-quicksand m-0 ${text.textColor}`}>{text.text}</p>
+          <p className={`avatar-text ${text.textColor}`}>{text.text}</p>
+          <p className={`avarat-name ${name.textColor}`}>{name.text}</p>
         </div>
         <div>
-          <img className="inline-block h-20 w-20 rounded-full" src={src} alt={alt}/>
+          <img className="avatar-img" src={src} alt={alt}/>
         </div>
       </div>
     </a>

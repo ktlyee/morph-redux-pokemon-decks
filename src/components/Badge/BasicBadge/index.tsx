@@ -4,14 +4,16 @@ interface BasicBadgeProps {
     text: string
     textStyle: string
     backgroundColor: string
+    positionStyle?: string
 }
 
 const BasicBadge = ({
     text,
     textStyle,
-    backgroundColor
+    backgroundColor,
+    positionStyle
 }: BasicBadgeProps) => (
-    <span className={`inline-flex items-center px-5 py-1.5 rounded-full shadow-md ${textStyle} ${backgroundColor}`}>
+    <span className={`inline-flex items-center px-3 rounded-xl shadow-md ${positionStyle} ${textStyle} ${backgroundColor}`}>
         {text}
     </span>
 )
