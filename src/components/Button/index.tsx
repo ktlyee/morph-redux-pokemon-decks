@@ -18,6 +18,7 @@ interface ButtonProps {
     borderColor?: string
     hoverButton?: string
     focusButton?: string
+    positionStyle?: string
     size?: 'small' | 'medium' | 'large' | 'full'
     handleClick?: () => void
 }
@@ -28,6 +29,7 @@ const Button = ({
     icon,
     borderColor,
     hoverButton,
+    positionStyle,
     focusButton = 'focus:ring-transparent',
     size = 'medium',
     handleClick
