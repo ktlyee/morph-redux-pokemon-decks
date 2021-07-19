@@ -31,7 +31,7 @@ function LoginPage() {
                                         name: 'email',
                                         placeholder: 'you@example.com',
                                         style: 'appearance-none block w-full px-4 py-2 border border-transparent rounded-lg shadow-sm sm:text-sm',
-                                        focusStyle: 'focus:outline-none focus:border focus:border-blue-dark'
+                                        focusStyle: 'focus:outline-none'
                                     }}
                                     isCheckValid={false}
                                     CheckValidation={{
@@ -58,7 +58,7 @@ function LoginPage() {
                                         name: 'password',
                                         placeholder: 'password',
                                         style: 'appearance-none block w-full px-4 py-2 border border-transparent rounded-lg shadow-sm sm:text-sm',
-                                        focusStyle: 'focus:outline-none focus:border focus:border-blue-dark'
+                                        focusStyle: 'focus:outline-none'
                                     }}
                                     isCheckValid={false}
                                     CheckValidation={{
