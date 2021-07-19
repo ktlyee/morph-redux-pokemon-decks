@@ -7,17 +7,17 @@ interface MyFormValues {
   userName: string;
   email: string;
   password: string;
+  avatar: any
 }
 
-const initialValues: MyFormValues = { userName: "", email: "", password: "" };
+const initialValues: MyFormValues = { userName: "", email: "", password: "", avatar: {} };
 
 const Register = () => {
   return (
     <div className="flex items-center justify-center bg-white-smoke flex-col min-h-screen">
       <h2 className="text-center text-blue-darkest text-4xl p-5">Register</h2>
       <div
-        className="bg-yellow flex items-center justify-center border-4 border-blue-darkest shadow rounded-xl md:flex p-8 md:p-0"
-        style={{ width: "534px", height: "699px" }}
+        className="card-container md:flex p-8 md:p-0"
       >
         <Formik
           initialValues={initialValues}
@@ -27,8 +27,12 @@ const Register = () => {
             actions.setSubmitting(false);
           }}
         >
+          {(formProps) => (
           <Form className="p-8">
-            <div>
+            <div className="bg-white-smoke rounded-full w-44 h-44 justify-center">
+              <input className="justify-center" type="file" name="avatar" onChange={(e) => formProps.setFieldValue("avatar", e.target.files)}/>
+            </div>
+            <div className="text-justify">
               <label htmlFor="userName" className="text-left text-lg">
                 Username
               </label>
@@ -66,6 +70,7 @@ const Register = () => {
               </button>
             </div>
           </Form>
+          )}
         </Formik>
       </div>
     </div>
