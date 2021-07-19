@@ -114,7 +114,7 @@ export const InfoCard = ({
                                         <div>
                                             <p className='text-2xl font-normal font-quicksand'>{id}</p>
                                             <p className='text-lg font-press-start pt-2'>{name}</p>
-                                            <div className='space-x-1 flex flex-wrap items-center mt-5'>
+                                            <div className='space-x-2 flex flex-wrap items-center mt-5'>
                                                 <BasicBadge 
                                                     text={`${tag.text}`} 
                                                     textStyle='text-xl leading-8 font-medium text-white font-vt323' 
