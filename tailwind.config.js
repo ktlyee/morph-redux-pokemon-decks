@@ -40,7 +40,10 @@ module.exports = {
         DEFAULT: '#ffffff',
         smoke: '#f5f5f5'
       },
-      gray: colors.coolGray
+      gray: colors.coolGray,
+      purple: {
+        DEFAULT: '#d1c4e9'
+      }
     }
   },
   variants: {
