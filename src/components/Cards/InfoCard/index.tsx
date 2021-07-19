@@ -1,6 +1,6 @@
 import React, { Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { BasicBadge, CircularBadge } from '../../../components'
+import { BasicBadge, CircularBadge } from '../..'
 import { ArrowNarrowRightIcon, XIcon } from '@heroicons/react/outline'
 import './infoCard.css'
 
