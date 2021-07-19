@@ -61,7 +61,7 @@ const InputWithChild = ({
             type={`${input.type}`}
             name={`${input.name}`}
             id={`${input.id}`}
-            className={`w-full pr-10 sm:text-sm rounded-2xl focus:outline-none border ${input.style} ${input.focusStyle}`}
+            className={`w-full pr-10 sm:text-sm focus:outline-none border ${input.style} ${input.focusStyle}`}
             placeholder={`${input.placeholder}`}
             defaultValue={`${CheckValidation.defaultValue}`}
             aria-invalid={`${CheckValidation.ariaInvalid}`}
@@ -72,7 +72,7 @@ const InputWithChild = ({
             type={`${input.type}`}
             name={`${input.name}`}
             id={`${input.id}`}
-            className={`shadow-sm w-full sm:text-sm rounded-2xl focus:outline-none border ${input.style} ${input.focusStyle}`}
+            className={`shadow-sm w-full sm:text-sm focus:outline-none border ${input.style} ${input.focusStyle}`}
             placeholder={`${input.placeholder}`}
           />
         )}
