@@ -6,8 +6,8 @@ button {
     width: 476px;
     height: 65px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    font-size: large;
-    @apply bg-blue border-4 border-blue-dark rounded-lg text-yellow-light
+    font-weight: 900;
+    @apply bg-blue border-4 border-blue-dark rounded-lg text-yellow-light text-2xl
 }
 
 .button-full {
@@ -24,6 +24,23 @@ input {
 .card-container {
     text-align: -webkit-center;
     width: 534px; 
-    height: 699px;
+    height: 700px;
     @apply bg-yellow flex items-center justify-center border-4 border-blue-darkest shadow rounded-xl
+}
+
+label {
+    @apply text-blue-darkest
+}
+
+.label-form {
+    @apply text-left text-xl my-4
+}
+
+.avatar-img {   
+    align-items: center;
+    @apply bg-white-smoke rounded-full w-44 h-44 flex justify-center
+}
+
+.label-upload {
+    @apply py-14 px-14 rounded-full m-5 cursor-pointer bg-white-smoke font-medium 
 }

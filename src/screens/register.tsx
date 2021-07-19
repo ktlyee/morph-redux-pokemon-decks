@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, InputWithChild } from "../components";
+import { PlusIcon } from "@heroicons/react/outline";
 import { Formik, Field, Form, FormikHelpers } from "formik";
 import "./register.css";
 
@@ -32,12 +32,12 @@ const Register = () => {
         >
           {(formProps) => (
             <Form className="p-8">
-              <div className="bg-white-smoke rounded-full w-44 h-44 justify-center">
+              <div className="avatar-img hover:border-transparent hover:shadow-lg border-4 border-dashed border-gray-400">
                 <label
                   htmlFor="avatar"
-                  className="relative top-20 cursor-pointe bg-white-smoke rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                  className="label-upload hover:text-blue focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue"
                 >
-                  <span>Upload a file</span>
+                  <PlusIcon className="h-10 w-10" />
                   <input
                     className="justify-center sr-only"
                     type="file"
@@ -49,8 +49,8 @@ const Register = () => {
                   />
                 </label>
               </div>
-              <div className="text-justify">
-                <label htmlFor="userName" className="text-left text-lg">
+              <div className="text-justify space-y-2">
+                <label htmlFor="userName" className="label-form">
                   Username
                 </label>
                 <Field
@@ -59,7 +59,7 @@ const Register = () => {
                   placeholder="Username"
                   className="input"
                 />
-                <label htmlFor="email" className="text-left text-lg">
+                <label htmlFor="email" className="label-form">
                   E-mail
                 </label>
                 <Field
@@ -68,7 +68,7 @@ const Register = () => {
                   placeholder="E-mail"
                   className="input"
                 />
-                <label htmlFor="password" className="text-left text-lg">
+                <label htmlFor="password" className="label-form">
                   Password
                 </label>
                 <Field
@@ -80,7 +80,7 @@ const Register = () => {
               </div>
               <div>
                 <button
-                  className="button button-full hover:bg-blue-dark mt-5"
+                  className="button button-full hover:bg-blue-dark hover:text-yellow mt-5"
                   type="submit"
                 >
                   Submit
