@@ -1,7 +1,12 @@
 import React from 'react'
 import { InputWithChild, Button } from '../components'
 
-function LoginPage() {
+interface ILogin {
+    email: string
+    password: string
+}
+
+function LoginPage({ email, password }: ILogin) {
     return (
         <div className='min-h-screen bg-white-smoke flex-col justify-center py-12 sm:px-6 lg:px-8'>
             <div className='mt-16'>
