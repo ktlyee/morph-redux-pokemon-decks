@@ -1,9 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { InputWithChild, Button } from '../components'
+import { Formik, Form, Field } from 'formik'
+
+interface FormValues {
+    email: string
+    password: string
+}
 
 function LoginPage() {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const initialValues: FormValues = { email: '', password: '' }
 
     return (
         <div className='min-h-screen bg-white-smoke flex-col justify-center py-12 sm:px-6 lg:px-8'>
@@ -20,73 +25,58 @@ function LoginPage() {
                 </div>
                 <div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
                     <div className='bg-yellow border-2 border-blue-darkest py-5 px-4 shadow rounded-xl sm:px-5'>
-                        <form className='space-y-3' action='#' method='POST'>
-                            <div>
-                                <InputWithChild 
-                                    label={{
-                                        htmlFor: 'email',
-                                        style: 'block text-sm font-medium text-blue-darkest text-left',
-                                        text: 'Email address'
-                                    }}
-                                    input={{
-                                        id: 'email',
-                                        type: 'email',
-                                        name: 'email',
-                                        placeholder: 'you@example.com',
-                                        style: 'appearance-none block w-full px-4 py-2 border border-transparent rounded-lg shadow-sm sm:text-sm',
-                                        focusStyle: 'focus:outline-none'
-                                    }}
-                                    isCheckValid={false}
-                                    CheckValidation={{
-                                        ariaInvalid: false,
-                                        defaultValue: 'email-error'
-                                    }}
-                                    invalidText={{
-                                        text: 'Your email is not correct',
-                                        style: 'mt-2 text-sm text-red',
-                                        id: 'message-error'
-                                    }}
-                                />
-                            </div>
-                            <div>
-                                <InputWithChild 
-                                    label={{
-                                        htmlFor: 'password',
-                                        style: 'block text-sm font-medium text-blue-darkest text-left',
-                                        text: 'Password'
-                                    }}
-                                    input={{
-                                        id: 'password',
-                                        type: 'password',
-                                        name: 'password',
-                                        placeholder: 'password',
-                                        style: 'appearance-none block w-full px-4 py-2 border border-transparent rounded-lg shadow-sm sm:text-sm',
-                                        focusStyle: 'focus:outline-none'
-                                    }}
-                                    isCheckValid={false}
-                                    CheckValidation={{
-                                        ariaInvalid: false,
-                                        defaultValue: '',
-                                        ariaDescribedby: 'password-error'
-                                    }}
-                                    invalidText={{
-                                        text: 'Your password is not correct',
-                                        style: 'mt-2 text-sm text-red',
-                                        id: 'message-error'
-                                    }}
-                                />
-                            </div>
-                            <div>
-                                <Button 
-                                    text={{ text: 'Sign in', color: 'text-yellow-light' }}
-                                    buttonColor='bg-blue'
-                                    borderColor='border-2 border-blue-dark rounded-lg'
-                                    hoverButton='hover:bg-blue-dark'
-                                    size='full'
-                                    positionStyle='mt-5'
-                                />
-                            </div>
-                        </form>
+                        <Formik
+                            initialValues={initialValues}
+                            onSubmit={(values, actions) => {
+                                console.log({ values, actions });
+                                alert(JSON.stringify(values, null, 2));
+                                actions.setSubmitting(false);
+                            }}
+                        >
+                            <Form className='space-y-3'>
+                                <div>
+                                    <label
+                                        htmlFor='email'
+                                        className='block text-sm font-medium text-blue-darkest text-left'
+                                    >
+                                        Email Address
+                                    </label>
+                                    <Field
+                                        id='email'
+                                        type='email'
+                                        name='email'
+                                        placeholder='you@example.com'
+                                        className='mt-1 appearance-none block w-full px-4 py-2 border border-transparent rounded-lg shadow-sm focus:outline-none sm:text-sm'
+                                    />
+                                </div>
+                                <div>
+                                    <label
+                                        htmlFor='password'
+                                        className='block text-sm font-medium text-blue-darkest text-left'
+                                    >
+                                        Email Address
+                                    </label>
+                                    <Field
+                                        id='password'
+                                        type='password'
+                                        name='password'
+                                        placeholder='password'
+                                        className='mt-1 appearance-none block w-full px-4 py-2 border border-transparent rounded-lg shadow-sm focus:outline-none sm:text-sm'
+                                    />
+                                </div>
+                                <div>
+                                    <Button 
+                                        typeButton='submit'
+                                        text={{ text: 'Sign in', color: 'text-yellow-light' }}
+                                        buttonColor='bg-blue'
+                                        borderColor='border-2 border-blue-dark rounded-lg'
+                                        hoverButton='hover:bg-blue-dark'
+                                        size='full'
+                                        positionStyle='mt-5'
+                                    />
+                                </div>
+                            </Form>
+                        </Formik>    
                         <div className='mt-6'>
                             <div className="relative">
                                 <div className="absolute inset-0 flex items-center justify-center">
@@ -104,7 +94,6 @@ function LoginPage() {
                                     Register here
                                 </a>
                             </div>
-                            
                         </div>
                     </div>
                 </div> 
