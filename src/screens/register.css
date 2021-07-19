@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+button {
+    @apply bg-blue border-2 border-blue-dark rounded-lg text-yellow-light
+}
+
+.button-full {
+    @apply w-full px-4 py-2 flex justify-center
+}
+
+input {
+    width: 476px;
+    height: 65px;
+    font-size: medium;
+    @apply w-full border-blue p-3 text-blue-darkest rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-darkest focus:border-blue-dark
+}

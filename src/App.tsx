@@ -2,47 +2,26 @@ import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { TestComponent } from "./testComponents"
+import Register from "./screens/register"
+import { BrowserRouter, Route, Switch } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
+    <BrowserRouter>
     <div className="App">
-      <TestComponent/>
+          <Switch>
+            <Route exact path="/" component={TestComponent} />
+            <Route path="/register" component={Register} />
+          </Switch>
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p className="font-press-start">Hello Vite + React!</p>
-        <p>
-          <button
-            className="p-3 rounded-3xl border-4 border-red-dark font-quicksand text-blue-dark"
-            type="button"
-            onClick={() => setCount((count) => count + 1)}
-          >
-            count is: {count}
-          </button>
-        </p>
-        
-        <p className="font-press-start">
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
+        <NavLink className="p-2 m-3 text-white bg-blue-dark rounded-md hover:bg-blue-dark" exact to='/'> Test Component </NavLink>
+        <NavLink className="p-2 text-white bg-blue-dark rounded-md hover:bg-blue-dark" to='/register'> Test Register </NavLink>
       </header>
     </div>
+    </BrowserRouter>
   );
 }
 
