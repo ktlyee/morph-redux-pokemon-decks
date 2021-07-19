@@ -1,6 +1,56 @@
 import React, { useState } from "react";
 import { MailIcon, QuestionMarkCircleIcon } from "@heroicons/react/solid";
-import { Avatar, InputWithChild, Toggle } from "./components";
+import { Avatar, InputWithChild, Toggle, CardShow } from "./components";
+import axios from "axios";
+
+const pokemon = [
+  {
+    id: "1",
+    name: "Pokemon1",
+    isFav: true,
+    imageUrl:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png",
+    bgCard: 'bg-purple'
+  },
+  {
+    id: "2",
+    name: "Pokemon2",
+    isFav: true,
+    imageUrl:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png",
+    bgCard: 'bg-purple'
+  },
+  {
+    id: "3",
+    name: "Pokemon3",
+    isFav: false,
+    imageUrl:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png",
+    bgCard: 'bg-purple'
+  },
+  {
+    id: "4",
+    name: "Pokemon4",
+    isFav: false,
+    imageUrl:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png",
+    bgCard: 'bg-purple'  
+  },
+];
+
+const handleClick = ({}) => {
+  axios.get("https://pokeapi.co/api/v2/pokemon/ditto").then((res) => {
+    console.log(res.data);
+  }) 
+}
+
+const goInfo = () => {
+  return console.log("click Info");
+}
+
+const clickFav = () => {
+  return console.log("click Fav");
+}
 
 const TestComponent = () => {
   const [enabled, setEnabled] = useState(false)
@@ -11,8 +61,8 @@ const TestComponent = () => {
         <Avatar
           href="#"
           src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-          name={{ text: "Welcome!", textColor: "text-blue font-bold" }}
-          text={{ text: "@pokemon", textColor: "text-blue font-bold" }}
+          text={{ text: "Welcome!", textColor: "text-blue font-bold" }}
+          name={{ text: "Pokemon", textColor: "text-blue font-bold" }}
         />
       </div>
       <div className="p-5 grid justify-start">
@@ -54,6 +104,10 @@ const TestComponent = () => {
           />
         </div>
       </div>
+      <div className="p-10">
+        <CardShow showData={pokemon} handleInfo={goInfo} handleFav={clickFav}/>
+      </div>
+      <button className="h-10 w-20 text-white bg-blue-dark rounded-md hover:bg-blue-dark" onClick={handleClick}> Test this </button>
     </>
   );
 };

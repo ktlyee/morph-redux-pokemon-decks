@@ -5,7 +5,8 @@ module.exports = {
     extend: {
       fontFamily: {
         'press-start': ['"Press Start 2P"', 'cursive'],
-        'quicksand': ['"Quicksand"', 'sans-serif']
+        'quicksand': ['"Quicksand"', 'sans-serif'],
+        'vt323': ['"VT323"', 'monospace']
       },
       container: {
         padding: {
@@ -23,7 +24,9 @@ module.exports = {
       },
       yellow: {
         DEFAULT: '#FFCB05',
-        light: '#F2E641'
+        light: '#F2E641',
+        lighter: '#FEF08A',
+        lightest: '#FEF9C3'
       },
       blue: {
         DEFAULT: '#306CB4',
@@ -37,6 +40,9 @@ module.exports = {
       white: {
         DEFAULT: '#ffffff',
         smoke: '#f5f5f5'
+      },
+      purple: {
+        DEFAULT: '#d1c4e9'
       }
     }
   },
