@@ -7,6 +7,7 @@ interface Idata {
   name: string
   isFav: boolean
   imageUrl: string
+  bgCard: string
 }
 
 export interface CardShowProp {
@@ -21,7 +22,7 @@ const CardShow = ({showData, handleInfo, handleFav}: CardShowProp) => {
       {showData.map((showData) => (
         <li
           key={showData.id}
-          className="col-span-1 flex flex-col text-center w-64 h-80 bg-white-smoke rounded-2xl shadow-lg"
+          className={`card-poke ${showData.bgCard} transform hover:scale-110 motion-reduce:transform-none`}
         >
           <div>
             <div className="-mt-px flex">
