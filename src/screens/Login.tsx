@@ -66,7 +66,7 @@ function LoginPage() {
                                 </div>
                                 <div>
                                     <Button 
-                                        typeButton='submit'
+                                        type='submit'
                                         text={{ text: 'Sign in', color: 'text-yellow-light' }}
                                         buttonColor='bg-blue'
                                         borderColor='border-2 border-blue-dark rounded-lg'
