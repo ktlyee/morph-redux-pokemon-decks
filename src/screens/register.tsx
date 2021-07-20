@@ -37,14 +37,26 @@ const Register = () => {
                   htmlFor="avatar"
                   className="label-upload hover:text-blue focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue"
                 >
-                  <PlusIcon className="h-10 w-10" />
+                  <img id="previewImg" src="" className="w-full h-full rounded-full" style={{display: 'none'}}/>
+                  {/* preview size issue */}
+                  <PlusIcon id="previewIcon" className="h-10 w-10" />
                   <input
                     className="justify-center sr-only"
                     type="file"
                     id="avatar"
+                    accept="image/*"
                     name="avatar"
-                    onChange={(e) =>
-                      formProps.setFieldValue("avatar", e.target.files)
+                    onChange={(e) =>{
+                      let previewImg = document.querySelector('#previewImg') as HTMLImageElement;
+                      let previewIcon = document.querySelector('#previewIcon') as HTMLElement;
+                      const [file] = e.target.files;
+                      if (file && previewImg){
+                        previewImg.src = URL.createObjectURL(file)
+                        previewImg.style.display = ''
+                        previewIcon.style.display = 'none'
+                      }
+                      formProps.setFieldValue("avatar", URL.createObjectURL(file))
+                      }
                     }
                   />
                 </label>
