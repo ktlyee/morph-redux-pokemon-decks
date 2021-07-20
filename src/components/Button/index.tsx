@@ -14,6 +14,7 @@ interface IIcon {
 interface ButtonProps {
     text: IText
     buttonColor: string
+    type?: 'button' | 'submit' | 'reset'
     icon?: IIcon
     borderColor?: string
     hoverButton?: string
@@ -26,6 +27,7 @@ interface ButtonProps {
 const Button = ({
     text,
     buttonColor,
+    type,
     icon,
     borderColor,
     hoverButton,
@@ -35,7 +37,7 @@ const Button = ({
     handleClick
 }: ButtonProps) => (
     <button
-        type="button"
+        type={type}
         onClick={handleClick}
         className={`button button-${size} ${text.color} ${borderColor} ${buttonColor} ${hoverButton} ${focusButton} ${positionStyle}`}
     >
