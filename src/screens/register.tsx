@@ -49,7 +49,7 @@ const Register = () => {
                     onChange={(e) =>{
                       let previewImg = document.querySelector('#previewImg') as HTMLImageElement;
                       let previewIcon = document.querySelector('#previewIcon') as HTMLElement;
-                      const [file] = e.target.files;
+                      const [file]: any = e.target.files;
                       if (file && previewImg){
                         previewImg.src = URL.createObjectURL(file)
                         previewImg.style.display = ''
