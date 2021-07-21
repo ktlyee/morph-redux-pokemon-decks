@@ -2,8 +2,8 @@ import React from "react";
 import { PlusIcon } from "@heroicons/react/outline";
 import { Formik, Field, Form, FormikHelpers } from "formik";
 import "./register.css";
-// import { useAppDispatch, useAppSelector } from '../app/hooks'
-import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from '../app/hooks'
+// import { useSelector, useDispatch } from "react-redux";
 import { register } from "../actions/auth";
 import { Link } from 'react-router-dom'
 
@@ -21,8 +21,8 @@ const initialValues: MyFormValues = {
   avatar: {},
 };
 
-const Register = (props: any) => {
-  const dispatch = useDispatch()
+const Register = () => {
+  const dispatch = useAppDispatch()
 
   return (
     <div className="flex items-center justify-center bg-white-smoke flex-col min-h-screen">

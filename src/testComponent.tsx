@@ -2,10 +2,6 @@ import React, { useState } from "react";
 import { MailIcon, QuestionMarkCircleIcon } from "@heroicons/react/solid";
 import { Avatar, InputWithChild, Toggle, CardShow, Button } from "./components";
 import axios from "axios";
-import { Redirect } from 'react-router-dom'
-import { logout } from './actions/auth'
-import { useDispatch } from "react-redux"
-import { useAppSelector, useAppDispatch } from './app/hooks'
 
 const pokemon = [
   {
@@ -58,18 +54,6 @@ const clickFav = () => {
 
 const TestComponent = () => {
   const [enabled, setEnabled] = useState(false)
-
-  // const { user: currentUser } = useAppSelector(state => state.auth.user)
-  const dispatch = useAppDispatch()
-
-  // if (!currentUser) {
-  //   return <Redirect to='/login' />
-  // }
-
-  const logOut = () => {
-      // dispatch(logout())
-      localStorage.removeItem("persistantState")
-  }
 
   return (
     <>
@@ -129,7 +113,7 @@ const TestComponent = () => {
       <Button 
         text={{text: 'Log out', color: 'text-blue'}}
         buttonColor='bg-yellow'
-        handleClick={logOut}
+        // handleClick={logOut}
       />
     </>
   );

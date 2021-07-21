@@ -12,7 +12,7 @@ function App() {
     <div className="App">
           <Switch>
             {/* <Route exact path={["/", "/home"]} component={TestComponent} /> */}
-            <Route exact path="/register" component={Register} />
+            <Route exact path="/" component={Register} />
             {/* <Route exact path='/login' component={Login} /> */}
           </Switch>
       {/* <header className="App-header">
