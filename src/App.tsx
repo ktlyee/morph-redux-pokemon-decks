@@ -11,6 +11,7 @@ function App() {
     <div className="App">
           <Switch>
             <Route exact path="/" component={TestComponent} />
+            <Route path="/test"/>
             <Route path="/register" component={Register} />
           </Switch>
       <header className="App-header">

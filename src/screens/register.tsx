@@ -32,7 +32,7 @@ const Register = () => {
         >
           {(formProps) => (
             <Form className="px-8 py-12">
-              <div className="avatar-img inset-y-0 hover:border-transparent hover:shadow-lg border-4 border-dashed border-gray-400">
+              <div className="regis-avatar-img inset-y-0 hover:border-transparent hover:shadow-lg border-4 border-dashed border-gray-400">
                 <label
                   htmlFor="avatar"
                   className="label-upload hover:text-blue focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue"
@@ -41,7 +41,7 @@ const Register = () => {
                   {/* preview size issue */}
                   <PlusIcon id="previewIcon" className="h-10 w-10" />
                   <input
-                    className="justify-center sr-only"
+                    className="input-avatar justify-center sr-only"
                     type="file"
                     id="avatar"
                     accept="image/*"
