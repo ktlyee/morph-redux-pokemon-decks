@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { MailIcon, QuestionMarkCircleIcon } from "@heroicons/react/solid";
-import { Avatar, InputWithChild, Toggle, CardShow } from "./components";
+import { Avatar, InputWithChild, Toggle, CardShow, Button } from "./components";
 import axios from "axios";
+import { Redirect } from 'react-router-dom'
+import { logout } from './actions/auth'
+import { useDispatch } from "react-redux"
+import { useAppSelector, useAppDispatch } from './app/hooks'
 
 const pokemon = [
   {
@@ -54,6 +58,18 @@ const clickFav = () => {
 
 const TestComponent = () => {
   const [enabled, setEnabled] = useState(false)
+
+  // const { user: currentUser } = useAppSelector(state => state.auth.user)
+  const dispatch = useAppDispatch()
+
+  // if (!currentUser) {
+  //   return <Redirect to='/login' />
+  // }
+
+  const logOut = () => {
+      // dispatch(logout())
+      localStorage.removeItem("persistantState")
+  }
 
   return (
     <>
@@ -108,6 +124,13 @@ const TestComponent = () => {
         <CardShow showData={pokemon} handleInfo={goInfo} handleFav={clickFav}/>
       </div>
       <button className="h-10 w-20 text-white bg-blue-dark rounded-md hover:bg-blue-dark" onClick={handleClick}> Test this </button>
+      {/* <h3>{currentUser.username} Profile</h3>
+      <p>Email: {currentUser.email}</p> */}
+      <Button 
+        text={{text: 'Log out', color: 'text-blue'}}
+        buttonColor='bg-yellow'
+        handleClick={logOut}
+      />
     </>
   );
 };

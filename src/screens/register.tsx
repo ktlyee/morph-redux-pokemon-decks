@@ -2,22 +2,28 @@ import React from "react";
 import { PlusIcon } from "@heroicons/react/outline";
 import { Formik, Field, Form, FormikHelpers } from "formik";
 import "./register.css";
+// import { useAppDispatch, useAppSelector } from '../app/hooks'
+import { useSelector, useDispatch } from "react-redux";
+import { register } from "../actions/auth";
+import { Link } from 'react-router-dom'
 
 interface MyFormValues {
-  userName: string;
+  username: string;
   email: string;
   password: string;
   avatar: any;
 }
 
 const initialValues: MyFormValues = {
-  userName: "",
+  username: "",
   email: "",
   password: "",
   avatar: {},
 };
 
-const Register = () => {
+const Register = (props: any) => {
+  const dispatch = useDispatch()
+
   return (
     <div className="flex items-center justify-center bg-white-smoke flex-col min-h-screen">
       <h2 className="text-center text-blue-darkest text-4xl p-5">Register</h2>
@@ -25,6 +31,8 @@ const Register = () => {
         <Formik
           initialValues={initialValues}
           onSubmit={(values, actions) => {
+            // handleRegister(values)
+            dispatch(register(values))
             console.log({ values, actions });
             alert(JSON.stringify(values, null, 2));
             actions.setSubmitting(false);
@@ -66,8 +74,8 @@ const Register = () => {
                   Username
                 </label>
                 <Field
-                  id="userName"
-                  name="userName"
+                  id="username"
+                  name="username"
                   placeholder="Username"
                   className="input"
                 />
