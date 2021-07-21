@@ -1,13 +1,14 @@
 import React from 'react'
-import { InputWithChild, Button } from '../components'
+import { Button } from '../components'
 import { Formik, Form, Field } from 'formik'
+import { Link } from 'react-router-dom'
 
 interface FormValues {
     email: string
     password: string
 }
 
-function LoginPage() {
+function Login() {
     const initialValues: FormValues = { email: '', password: '' }
 
     return (
@@ -54,7 +55,7 @@ function LoginPage() {
                                         htmlFor='password'
                                         className='block text-sm font-medium text-blue-darkest text-left'
                                     >
-                                        Email Address
+                                        Password
                                     </label>
                                     <Field
                                         id='password'
@@ -87,12 +88,12 @@ function LoginPage() {
                                 </div>
                             </div>
                             <div className='mt-2'>
-                                <a 
-                                    href='#'
+                                <Link
+                                    to='/register'
                                     className='py-6 underline text-blue-darkest font-semibold hover:text-blue-dark'
                                 >
                                     Register here
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -102,4 +103,4 @@ function LoginPage() {
     )
 }
 
-export default LoginPage
+export default Login
