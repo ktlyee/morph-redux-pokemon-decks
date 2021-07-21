@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { register } from "../actions/auth";
+
 import { PlusIcon } from "@heroicons/react/outline";
-import { Formik, Field, Form, FormikHelpers } from "formik";
+import { Formik, Field, Form } from "formik";
 import "./register.css";
+import { useAppDispatch } from "../app/hooks";
+import { store } from "../app/store";
 
 interface MyFormValues {
   userName: string;
@@ -18,6 +24,9 @@ const initialValues: MyFormValues = {
 };
 
 const Register = () => {
+
+  const dispatch = useAppDispatch();
+
   return (
     <div className="flex items-center justify-center bg-white-smoke flex-col min-h-screen">
       <h2 className="text-center text-blue-darkest text-4xl p-5">Register</h2>
@@ -26,7 +35,31 @@ const Register = () => {
           initialValues={initialValues}
           onSubmit={(values, actions) => {
             console.log({ values, actions });
-            alert(JSON.stringify(values, null, 2));
+            if (
+              values.userName &&
+              values.email &&
+              values.password &&
+              values.avatar
+            ) {
+              dispatch(
+                register(
+                  values.userName,
+                  values.email,
+                  values.password,
+                  values.avatar
+                )
+              ).then((res: any)=> 
+              console.log("register success?" + values)
+              ).catch((err: any)=>
+              console.log(err)
+              );
+              store.subscribe(()=>{
+                console.log(store.getState());
+              })
+              alert(JSON.stringify(values, null, 2));
+            } else {
+              alert("Invalid Form");
+            }
             actions.setSubmitting(false);
           }}
         >
@@ -37,7 +70,12 @@ const Register = () => {
                   htmlFor="avatar"
                   className="label-upload hover:text-blue focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue"
                 >
-                  <img id="previewImg" src="" className="w-full h-full rounded-full" style={{display: 'none'}}/>
+                  <img
+                    id="previewImg"
+                    src=""
+                    className="w-full h-full rounded-full"
+                    style={{ display: "none" }}
+                  />
                   {/* preview size issue */}
                   <PlusIcon id="previewIcon" className="h-10 w-10" />
                   <input
@@ -46,18 +84,24 @@ const Register = () => {
                     id="avatar"
                     accept="image/*"
                     name="avatar"
-                    onChange={(e) =>{
-                      let previewImg = document.querySelector('#previewImg') as HTMLImageElement;
-                      let previewIcon = document.querySelector('#previewIcon') as HTMLElement;
-                      const [file] = e.target.files;
-                      if (file && previewImg){
-                        previewImg.src = URL.createObjectURL(file)
-                        previewImg.style.display = ''
-                        previewIcon.style.display = 'none'
+                    onChange={(e) => {
+                      let previewImg = document.querySelector(
+                        "#previewImg"
+                      ) as HTMLImageElement;
+                      let previewIcon = document.querySelector(
+                        "#previewIcon"
+                      ) as HTMLElement;
+                      const [file]: any = e.target.files;
+                      if (file && previewImg) {
+                        previewImg.src = URL.createObjectURL(file);
+                        previewImg.style.display = "";
+                        previewIcon.style.display = "none";
                       }
-                      formProps.setFieldValue("avatar", URL.createObjectURL(file))
-                      }
-                    }
+                      formProps.setFieldValue(
+                        "avatar",
+                        URL.createObjectURL(file)
+                      );
+                    }}
                   />
                 </label>
               </div>
