@@ -22,7 +22,6 @@ interface ButtonProps {
     positionStyle?: string
     size?: 'small' | 'medium' | 'large' | 'full'
     handleClick?: () => void
-    positionStyle?: string
 }
 
 const Button = ({
@@ -35,8 +34,7 @@ const Button = ({
     positionStyle,
     focusButton = 'focus:ring-transparent',
     size = 'medium',
-    handleClick,
-    positionStyle
+    handleClick
 }: ButtonProps) => (
     <button
         type={type}

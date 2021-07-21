@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import { TestComponent } from "./testComponents"
 import Register from "./screens/register"
-import Login from "./screens/login";
+import Login from './screens/Login'
 import { Route, Switch } from "react-router-dom"
 import { NavLink } from "react-router-dom"
 
