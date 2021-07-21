@@ -1,6 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { createStore } from 'redux'
+import { createStore, compose, applyMiddleware } from 'redux'
 import auth from '../reducers/auth'
+
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 function saveToLocalStorage(state: any) {
   try {
@@ -22,7 +30,11 @@ function loadFromLocalStorage() {
   }
 }
 
-export const store = createStore(auth, loadFromLocalStorage())
+export const store = createStore(
+  auth, 
+  loadFromLocalStorage(),
+  composeEnhancers()
+)
 store.subscribe(() => saveToLocalStorage(store.getState()))
 
 export type AppDispatch = typeof store.dispatch

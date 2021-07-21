@@ -13,7 +13,7 @@ function App() {
           <Switch>
             {/* <Route exact path={["/", "/home"]} component={TestComponent} /> */}
             <Route exact path="/" component={Register} />
-            {/* <Route exact path='/login' component={Login} /> */}
+            {/* <Route exact path='/' component={Login} /> */}
           </Switch>
       {/* <header className="App-header">
         <NavLink className="p-2 m-3 text-white bg-blue-dark rounded-md hover:bg-blue-dark" exact to='/'> Test Component </NavLink>

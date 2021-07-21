@@ -4,31 +4,31 @@ import { Formik, Form, Field } from 'formik'
 import { Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { Redirect } from 'react-router-dom'
-import { login } from "../actions/auth"
+// import { login } from "../actions/auth"
 
 interface FormValues {
     email: string
     password: string
 }
 
-function Login(props: any, { email, password }: FormValues) {
+function Login() {
     const initialValues: FormValues = { email: '', password: '' }
 
-    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
-    const dispatch = useAppDispatch()
+    // const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
+    // const dispatch = useAppDispatch()
 
-    const handleLogin = (e: any) => {
-        e.preventDefault()
-        dispatch(login(email, password))
-            .then(() => {
-                props.history.push('/')
-                window.location.reload()
-            })
-    }
+    // const handleLogin = (e: any) => {
+    //     e.preventDefault()
+    //     dispatch(login(email, password))
+    //         .then(() => {
+    //             props.history.push('/')
+    //             window.location.reload()
+    //         })
+    // }
 
-    if (isLoggedIn) {
-        return <Redirect to='/home' />
-    }
+    // if (isLoggedIn) {
+    //     return <Redirect to='/home' />
+    // }
 
     return (
         <div className='min-h-screen bg-white-smoke flex-col justify-center py-12 sm:px-6 lg:px-8'>
@@ -48,7 +48,7 @@ function Login(props: any, { email, password }: FormValues) {
                         <Formik
                             initialValues={initialValues}
                             onSubmit={(values, actions) => {
-                                handleLogin
+                                // handleLogin
                                 console.log({ values, actions });
                                 alert(JSON.stringify(values, null, 2));
                                 actions.setSubmitting(false);
