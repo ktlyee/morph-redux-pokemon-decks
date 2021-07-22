@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-button {
+.button {
     width: 476px;
     height: 65px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -14,7 +14,7 @@ button {
     @apply w-full px-4 py-2 flex justify-center
 }
 
-input {
+.input-avatar {
     width: 476px;
     height: 65px;
     font-size: large;
@@ -28,20 +28,16 @@ input {
     @apply bg-yellow flex items-center justify-center border-4 border-blue-darkest shadow rounded-xl
 }
 
-label {
-    @apply text-blue-darkest
-}
-
 .label-form {
     font-weight: 500;
-    @apply text-left text-xl pt-10
+    @apply text-blue-darkest text-left text-xl pt-10
 }
 
-.avatar-img {   
+.regis-avatar-img {   
     align-items: center;
     @apply bg-white-smoke rounded-full w-44 h-44 flex justify-center
 }
 
 .label-upload {
-    @apply py-14 px-14 rounded-full m-5 cursor-pointer bg-white-smoke font-medium 
+    @apply text-blue-darkest py-14 px-14 rounded-full m-5 cursor-pointer bg-white-smoke font-medium 
 }
