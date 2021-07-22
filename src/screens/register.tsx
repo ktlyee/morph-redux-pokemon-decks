@@ -23,7 +23,8 @@ const initialValues: MyFormValues = {
 const Register = (props: any) => {
   const dispatch = useAppDispatch()
 
-  const handleClick = () => {
+  const handleRegister = (values: object) => {
+    dispatch(register(values))
     props.history.push("/")
   }
 
@@ -34,8 +35,7 @@ const Register = (props: any) => {
         <Formik
           initialValues={initialValues}
           onSubmit={(values, actions) => {
-            // handleRegister(values)
-            dispatch(register(values))
+            handleRegister(values)
             console.log({ values, actions });
             alert(JSON.stringify(values, null, 2));
             actions.setSubmitting(false);
@@ -110,7 +110,6 @@ const Register = (props: any) => {
                   buttonColor="bg-blue"
                   hoverButton="hover:bg-blue-dark hover:text-yellow"
                   borderColor="border-4 border-blue-dark rounded-lg"
-                  handleClick={handleClick}
                 />
               </div>
             </Form>
