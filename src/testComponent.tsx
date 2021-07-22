@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { MailIcon, QuestionMarkCircleIcon } from "@heroicons/react/solid";
-import { Avatar, InputWithChild, Toggle, CardShow } from "./components";
+import { Avatar, InputWithChild, Toggle, CardShow, Button } from "./components";
 import axios from "axios";
 
 const pokemon = [
@@ -108,6 +108,13 @@ const TestComponent = () => {
         <CardShow showData={pokemon} handleInfo={goInfo} handleFav={clickFav}/>
       </div>
       <button className="h-10 w-20 text-white bg-blue-dark rounded-md hover:bg-blue-dark" onClick={handleClick}> Test this </button>
+      {/* <h3>{currentUser.username} Profile</h3>
+      <p>Email: {currentUser.email}</p> */}
+      <Button 
+        text={{text: 'Log out', color: 'text-blue'}}
+        buttonColor='bg-yellow'
+        // handleClick={logOut}
+      />
     </>
   );
 };
