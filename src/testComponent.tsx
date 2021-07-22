@@ -3,7 +3,7 @@ import { MailIcon, QuestionMarkCircleIcon } from "@heroicons/react/solid";
 import { Avatar, InputWithChild, Toggle, CardShow } from "./components";
 import axios from "axios";
 
-const pokemon = [
+export const pokemon = [
   {
     id: "1",
     name: "Pokemon1",

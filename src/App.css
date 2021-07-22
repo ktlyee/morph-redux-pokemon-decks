@@ -3,6 +3,7 @@
 
 .App {
   text-align: center;
+  padding: 2rem;
 }
 
 .App-logo {
@@ -16,6 +17,10 @@
   }
 }
 
+.App-link {
+  color: #502dff;
+}
+
 .App-header {
   background-color: white;
   min-height: 100vh;
@@ -25,10 +30,6 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
-
-.App-link {
-  color: #502dff;
 }
 
 @keyframes App-logo-spin {
