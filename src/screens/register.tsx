@@ -1,7 +1,7 @@
 import React from "react";
 import { PlusIcon } from "@heroicons/react/outline";
 import { Formik, Field, Form, FormikHelpers } from "formik";
-import "./register.css";
+import "../styles/register.css";
 
 interface MyFormValues {
   userName: string;
