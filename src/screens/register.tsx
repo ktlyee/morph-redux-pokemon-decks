@@ -4,6 +4,7 @@ import { Formik, Field, Form, FormikHelpers } from "formik";
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { register } from "../actions/auth";
 import "../styles/register.css";
+import { Button } from "../components";
 
 interface MyFormValues {
   username: string;
@@ -24,7 +25,7 @@ const Register = () => {
 
   return (
     <div className="flex items-center justify-center bg-white-smoke flex-col min-h-screen">
-      <h2 className="text-center text-blue-darkest text-4xl p-5">Register</h2>
+      <h2 className="text-center text-blue-darkest text-4xl font-extrabold p-5">Register</h2>
       <div className="card-container md:flex p-8 md:p-0">
         <Formik
           initialValues={initialValues}
@@ -37,8 +38,8 @@ const Register = () => {
           }}
         >
           {(formProps) => (
-            <Form className="px-8 py-12">
-              <div className="regis-avatar-img inset-y-0 hover:border-transparent hover:shadow-lg border-4 border-dashed border-gray-400">
+            <Form className="px-8 py-10 h-full">
+              <div className="regis-avatar-img hover:border-transparent hover:shadow-lg border-4 border-dashed border-gray-400">
                 <label
                   htmlFor="avatar"
                   className="label-upload hover:text-blue focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue"
@@ -67,42 +68,45 @@ const Register = () => {
                   />
                 </label>
               </div>
-              <div className="text-justify space-y-2">
+              <div className="text-justify space-y-4">
                 <label htmlFor="userName" className="label-form">
                   Username
-                </label>
                 <Field
                   id="username"
                   name="username"
                   placeholder="Username"
                   className="input"
                 />
+                </label>
                 <label htmlFor="email" className="label-form">
                   E-mail
-                </label>
                 <Field
                   id="email"
                   name="email"
                   placeholder="E-mail"
                   className="input"
                 />
+                </label>
                 <label htmlFor="password" className="label-form">
                   Password
-                </label>
                 <Field
                   id="password"
                   name="password"
                   placeholder="Password"
                   className="input"
                 />
+                </label>
               </div>
               <div>
-                <button
-                  className="button button-full hover:bg-blue-dark hover:text-yellow mt-5"
+                <Button
+                  text={{ text: "Submit", color: "text-yellow-light text-2xl" }}
                   type="submit"
-                >
-                  Submit
-                </button>
+                  positionStyle="mt-6 flex justify-center w-full"
+                  size="medium"
+                  buttonColor="bg-blue"
+                  hoverButton="hover:bg-blue-dark hover:text-yellow"
+                  borderColor="border-4 border-blue-dark rounded-lg"
+                />
               </div>
             </Form>
           )}

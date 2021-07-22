@@ -39,12 +39,12 @@ function Login() {
                         src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1280px-International_Pok%C3%A9mon_logo.svg.png'
                         alt='pokemon-logo'
                     />
-                    <h2 className='mt-6 text-center text-xl font-extrabold text-blue-darkest'>
+                    <h2 className='mt-6 text-center text-4xl font-extrabold text-blue-darkest'>
                         Sign in to your account
                     </h2>
                 </div>
-                <div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
-                    <div className='bg-yellow border-2 border-blue-darkest py-5 px-4 shadow rounded-xl sm:px-5'>
+                <div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md flex items-center justify-center'>
+                    <div className='bg-yellow border-4 border-blue-darkest py-5 px-4 shadow rounded-xl sm:px-5' style={{width: "433px", height: "449px"}}>
                         <Formik
                             initialValues={initialValues}
                             onSubmit={(values, actions) => {
@@ -54,11 +54,11 @@ function Login() {
                                 actions.setSubmitting(false);
                             }}
                         >
-                            <Form className='space-y-3'>
+                            <Form className='space-y-3 py-7 pt-9'>
                                 <div>
                                     <label
                                         htmlFor='email'
-                                        className='block text-sm font-medium text-blue-darkest text-left'
+                                        className='block text-xl font-medium text-blue-darkest text-left'
                                     >
                                         Email Address
                                     </label>
@@ -67,13 +67,13 @@ function Login() {
                                         type='email'
                                         name='email'
                                         placeholder='you@example.com'
-                                        className='mt-1 appearance-none block w-full px-4 py-2 border border-transparent rounded-lg shadow-sm focus:outline-none sm:text-sm'
+                                        className='mt-1 appearance-none block w-full px-4 py-3 border border-transparent focus:outline-none rounded-lg shadow-sm focus:ring-1 focus:ring-blue focus:border-blue sm:text-sm'
                                     />
                                 </div>
                                 <div>
                                     <label
                                         htmlFor='password'
-                                        className='block text-sm font-medium text-blue-darkest text-left'
+                                        className='block text-xl font-medium text-blue-darkest text-left'
                                     >
                                         Password
                                     </label>
@@ -82,18 +82,18 @@ function Login() {
                                         type='password'
                                         name='password'
                                         placeholder='password'
-                                        className='mt-1 appearance-none block w-full px-4 py-2 border border-transparent rounded-lg shadow-sm focus:outline-none sm:text-sm'
+                                        className='mt-1 appearance-none block w-full px-4 py-3 border border-transparent focus:outline-none rounded-lg shadow-sm focus:ring-1 focus:ring-blue focus:border-blue sm:text-sm'
                                     />
                                 </div>
                                 <div>
                                     <Button 
                                         type='submit'
-                                        text={{ text: 'Sign in', color: 'text-yellow-light' }}
+                                        text={{ text: 'Sign in', color: 'text-yellow-light text-xl' }}
                                         buttonColor='bg-blue'
                                         borderColor='border-2 border-blue-dark rounded-lg'
                                         hoverButton='hover:bg-blue-dark'
                                         size='full'
-                                        positionStyle='mt-5'
+                                        positionStyle='mt-9'
                                     />
                                 </div>
                             </Form>

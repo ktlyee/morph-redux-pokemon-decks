@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Avatar, InputWithChild, Toggle, CardShow } from "../components";
+import { Avatar, InputWithChild, Toggle, CardShow, Pagination } from "../components";
 import { QuestionMarkCircleIcon } from "@heroicons/react/solid";
 import { pokemon } from "../testComponent";
 import axios from "axios";
@@ -19,8 +19,15 @@ const Homepage = () => {
   return (
     <>
       <header className="Home-header grid grid-cols-1">
-        <div className="p-5 col-start-1 col-end-2">
+        <div className="p-5 col-start-1">
           <Toggle enabled={enabled} setEnabled={() => setEnabled(!enabled)} />
+        </div>
+        <div>
+          <img
+            className="h-auto w-72 ml-36"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1280px-International_Pok%C3%A9mon_logo.svg.png"
+            alt="pokemon-logo"
+          />
         </div>
         <div className="p-5 bg-white col-end-7 col-span-2">
           <Avatar
@@ -32,13 +39,13 @@ const Homepage = () => {
         </div>
       </header>
       <div className="p-3 flex items-start justify-start bg-white">
-        <div className="w-full max-w-xs">
+        <div className="w-full max-w-xs ml-32">
           <InputWithChild
             input={{
               type: "text",
               name: "text",
               id: "Input",
-              placeholder: "placeholder",
+              placeholder: "",
               style: "border-blue p-3 text-blue-darkest",
               focusStyle:
                 "focus:ring-2 focus:ring-blue-darkest focus:border-blue-dark",
@@ -58,7 +65,7 @@ const Homepage = () => {
               <button className="absolute inset-y-0 right-0 pt-1 pr-3 flex items-center cursor-pointer">
                 <a href="#">
                   <QuestionMarkCircleIcon
-                    className="h-5 w-5 text-blue-dark"
+                    className="w-7 h-7 text-blue-dark"
                     aria-hidden="true"
                   />
                 </a>
@@ -67,8 +74,11 @@ const Homepage = () => {
           />
         </div>
       </div>
-      <div className="p-10">
+      <div className="p-14 mb-14">
         <CardShow showData={pokemon} handleInfo={goInfo} handleFav={clickFav} />
+      </div>
+      <div>
+          {/* <Pagination pages={[{pageNumber: 1, href: "", currentPage: true }]} text={} borderColor="" activePage={} prevButton={} nextButton={}/> */}
       </div>
     </>
   );

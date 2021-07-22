@@ -27,16 +27,16 @@ const CardShow = ({showData, handleInfo, handleFav}: CardShowProp) => {
           <div>
             <div className="-mt-px flex">
               <button className="w-0 flex-1 flex p-2" onClick={handleInfo}>
-                <InformationCircleIcon className="h-6 w-6 text-blue-darkest hover:text-blue"/>
+                <InformationCircleIcon className="h-7 w-7 text-blue-darkest hover:text-blue"/>
               </button>
               <button className="-ml-px w-0 flex-1 flex flex-row-reverse p-2" onClick={handleFav}>
-                <HeartIcon className={`h-6 w-6 ${showData.isFav? 'text-red-dark hover:text-red' : ''}`}/>
+                <HeartIcon className={`h-7 w-7 ${showData.isFav? 'text-red-dark hover:text-red' : ''}`}/>
               </button>
             </div>
           </div>
-          <div className="flex-1 flex flex-col p-8">
+          <div className="flex-1 flex flex-col p-7">
             <img
-              className="w-32 h-32 flex-shrink-0 mx-auto bg-black rounded-md"
+              className="w-36 h-36 flex-shrink-0 mx-auto bg-black rounded-md"
               src={showData.imageUrl}
               alt=""
             />

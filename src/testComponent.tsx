@@ -36,6 +36,22 @@ export const pokemon = [
       "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png",
     bgCard: 'bg-purple'  
   },
+  {
+    id: "5",
+    name: "Pokemon3",
+    isFav: false,
+    imageUrl:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png",
+    bgCard: 'bg-purple'
+  },
+  {
+    id: "6",
+    name: "Pokemon4",
+    isFav: false,
+    imageUrl:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png",
+    bgCard: 'bg-purple'  
+  },
 ];
 
 const handleClick = ({}) => {
