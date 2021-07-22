@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { PlusIcon } from "@heroicons/react/outline";
-import { Formik, Field, Form, FormikHelpers } from "formik";
-import { useAppDispatch, useAppSelector } from '../app/hooks'
+import { Formik, Field, Form } from "formik";
+import { useAppDispatch } from '../app/hooks'
 import { register } from "../actions/auth";
 import "../styles/register.css";
 import { Button } from "../components";
@@ -20,8 +20,12 @@ const initialValues: MyFormValues = {
   avatar: {},
 };
 
-const Register = () => {
+const Register = (props: any) => {
   const dispatch = useAppDispatch()
+
+  const handleClick = () => {
+    props.history.push("/")
+  }
 
   return (
     <div className="flex items-center justify-center bg-white-smoke flex-col min-h-screen">
@@ -106,6 +110,7 @@ const Register = () => {
                   buttonColor="bg-blue"
                   hoverButton="hover:bg-blue-dark hover:text-yellow"
                   borderColor="border-4 border-blue-dark rounded-lg"
+                  handleClick={handleClick}
                 />
               </div>
             </Form>
