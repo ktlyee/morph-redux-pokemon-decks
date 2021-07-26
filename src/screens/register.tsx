@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { PlusIcon } from "@heroicons/react/outline";
 import { Formik, Field, Form } from "formik";
 import { useAppDispatch } from '../app/hooks'
-import { register } from "../actions/auth";
+import { register } from "../reducers/auth";
 import "../styles/register.css";
 import { Button } from "../components";
+import { Redirect } from 'react-router-dom'
 
 interface MyFormValues {
   username: string;
@@ -17,15 +18,15 @@ const initialValues: MyFormValues = {
   username: "",
   email: "",
   password: "",
-  avatar: {},
-};
+  avatar: {}
+}
 
 const Register = (props: any) => {
   const dispatch = useAppDispatch()
 
   const handleRegister = (values: object) => {
     dispatch(register(values))
-    props.history.push("/")
+    props.history.push("/home")
   }
 
   return (
@@ -37,7 +38,7 @@ const Register = (props: any) => {
           onSubmit={(values, actions) => {
             handleRegister(values)
             console.log({ values, actions });
-            alert(JSON.stringify(values, null, 2));
+            // alert(JSON.stringify(values, null, 2));
             actions.setSubmitting(false);
           }}
         >
@@ -110,6 +111,7 @@ const Register = (props: any) => {
                   buttonColor="bg-blue"
                   hoverButton="hover:bg-blue-dark hover:text-yellow"
                   borderColor="border-4 border-blue-dark rounded-lg"
+                  // handleClick={() => props.history.push("/home")}
                 />
               </div>
             </Form>

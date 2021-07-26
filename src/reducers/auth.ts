@@ -1,12 +1,20 @@
-import { REGISTER } from '../actions/types'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-const auth = (state: any, action: any) => {
-  // const newState = Object.assign({}, state)
- 
-  switch(action.type) {
-    case REGISTER:
-      return action.payload
+const user = JSON.parse(localStorage.getItem('user') || '')
+
+const initialState = user ? user : { user: null }
+
+const authSlice = createSlice({
+  name: 'auth',
+  initialState,
+  reducers: {
+    register(state = initialState, action: PayloadAction<object>) {
+      state = action.payload
+      const serialisedState = JSON.stringify(state)
+      localStorage.setItem('user', serialisedState)
+    }
   }
-}
+})
 
-export default auth
+export const { register } = authSlice.actions
+export default authSlice.reducer

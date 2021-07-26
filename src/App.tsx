@@ -12,16 +12,16 @@ function App() {
     <BrowserRouter>
     <div className="App">
           <Switch>
-            <Route exact path="/" component={Homepage} />
+            <Route path="/home" component={Homepage} />
             <Route path="/register" component={Register} />
-            <Route path="/login" component={Login} />
-            <Route path="/test-component" component={TestComponent}/>
+            <Route exact path="/" component={Login} />
+            {/* <Route path="/test-component" component={TestComponent}/> */}
           </Switch>
-      <header className="App-header">
+      {/* <header className="App-header">
         <NavLink className="p-2 m-3 text-white bg-blue-dark rounded-md hover:bg-blue-dark" to='/test-component'> Test Component </NavLink>
         <NavLink className="p-2 text-white bg-blue-dark rounded-md hover:bg-blue-dark" to='/register'> Test Register </NavLink>
         <NavLink className="p-2 text-white bg-blue-dark rounded-md hover:bg-blue-dark" to='/login'> Test Login </NavLink>
-      </header>
+      </header> */}
     </div>
     </BrowserRouter>
   );

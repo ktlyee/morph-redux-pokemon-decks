@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Avatar, InputWithChild, Toggle, CardShow, Pagination } from "../components";
 import { QuestionMarkCircleIcon } from "@heroicons/react/solid";
 import { pokemon } from "../testComponent";
-import axios from "axios";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { Redirect } from "react-router";
 import "../styles/home.css";
 
 const goInfo = () => {
@@ -15,6 +16,12 @@ const clickFav = () => {
 
 const Homepage = () => {
   const [enabled, setEnabled] = useState(false);
+
+  const user = useAppSelector(state => state.auth)
+
+  if(user === null) {
+    return <Redirect to='/' />
+  }
 
   return (
     <>
@@ -32,9 +39,9 @@ const Homepage = () => {
         <div className="p-5 bg-white col-end-7 col-span-2">
           <Avatar
             href="#"
-            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            src={user.avatar == {} ? user.avatar : "https://image.flaticon.com/icons/png/512/147/147144.png"}
             text={{ text: "Welcome!", textColor: "text-blue font-bold" }}
-            name={{ text: "Pokemon", textColor: "text-blue font-bold" }}
+            name={{ text: `${user.username}`, textColor: "text-blue font-bold" }}
           />
         </div>
       </header>
@@ -77,6 +84,7 @@ const Homepage = () => {
       <div className="p-14 mb-14">
         <CardShow showData={pokemon} handleInfo={goInfo} handleFav={clickFav} />
       </div>
+      <p>{user.email}</p>
       <div>
           {/* <Pagination pages={[{pageNumber: 1, href: "", currentPage: true }]} text={} borderColor="" activePage={} prevButton={} nextButton={}/> */}
       </div>
