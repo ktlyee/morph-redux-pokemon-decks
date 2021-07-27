@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 let user = JSON.parse(localStorage.getItem('{}')!)
 
-if(localStorage.getItem('user')!){
+if(localStorage.getItem('user')){
   user = JSON.parse(localStorage.getItem('user')!)
 } 
 

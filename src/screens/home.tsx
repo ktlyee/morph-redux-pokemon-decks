@@ -5,6 +5,7 @@ import { pokemon } from "../testComponent";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { Redirect } from "react-router";
 import "../styles/home.css";
+import axios from "axios";
 
 const goInfo = () => {
   return console.log("click Info");
@@ -14,15 +15,23 @@ const clickFav = () => {
   return console.log("click Fav");
 };
 
+const handleClick = ({}) => {
+  axios.get("https://pokeapi.co/api/v2/pokemon?limit=6&offset=1").then((res) => {
+    console.log(res.data);
+    console.log(res.data.results);
+  }) 
+}
+
 const Homepage = () => {
   const [enabled, setEnabled] = useState(false);
 
   const user = useAppSelector(state => state.auth)
 
-  // if(user === null) {
-  //   return <Redirect to='/login' />
-  // }
-
+  if(user === null) {
+    return <Redirect to='/login' />
+  }
+  console.log(user.avatar);
+  
   return (
     <>
       <header className="Home-header grid grid-cols-1">
@@ -39,7 +48,7 @@ const Homepage = () => {
         <div className="p-5 bg-white col-end-7 col-span-2">
           <Avatar
             href="#"
-            src={user.avatar ? user.avatar : "https://www.slot1234.com/asset/web/images/icon/icon-default-avatar.png"}
+            src={user.avatar? user.avatar : "https://www.slot1234.com/asset/web/images/icon/icon-default-avatar.png"}
             text={{ text: "Welcome!", textColor: "text-blue font-bold" }}
             name={{ text: `${user.username}`, textColor: "text-blue font-bold" }}
           />
@@ -70,7 +79,7 @@ const Homepage = () => {
             }}
             RigthChild={
               <button className="absolute inset-y-0 right-0 pt-1 pr-3 flex items-center cursor-pointer">
-                <a href="#">
+                <a href="#" onClick={handleClick}>
                   <QuestionMarkCircleIcon
                     className="w-7 h-7 text-blue-dark"
                     aria-hidden="true"
