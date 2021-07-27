@@ -39,7 +39,7 @@ const Homepage = () => {
         <div className="p-5 bg-white col-end-7 col-span-2">
           <Avatar
             href="#"
-            src={user.avatar == {} ? user.avatar : "https://image.flaticon.com/icons/png/512/147/147144.png"}
+            src={user.avatar ? user.avatar : "https://www.slot1234.com/asset/web/images/icon/icon-default-avatar.png"}
             text={{ text: "Welcome!", textColor: "text-blue font-bold" }}
             name={{ text: `${user.username}`, textColor: "text-blue font-bold" }}
           />
