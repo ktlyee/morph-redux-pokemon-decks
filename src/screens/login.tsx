@@ -3,7 +3,6 @@ import { Button } from '../components'
 import { Formik, Form, Field } from 'formik'
 import { Link } from 'react-router-dom'
 import { useAppSelector } from '../app/hooks'
-import { Redirect } from 'react-router-dom'
 
 interface FormValues {
     email: string
@@ -23,10 +22,6 @@ function Login(props: any) {
             return alert('Email and password is not correct')
         }
     }
-
-    // if (user !== null) {
-    //     return <Redirect to='/' />
-    // }
 
     return (
         <div className='min-h-screen bg-white-smoke flex-col justify-center py-12 sm:px-6 lg:px-8'>

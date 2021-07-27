@@ -3,7 +3,6 @@ import { Avatar, InputWithChild, Toggle, CardShow, Pagination } from "../compone
 import { QuestionMarkCircleIcon } from "@heroicons/react/solid";
 import { pokemon } from "../testComponent";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { Redirect } from "react-router";
 import "../styles/home.css";
 import axios from "axios";
 
@@ -26,11 +25,6 @@ const Homepage = () => {
   const [enabled, setEnabled] = useState(false);
 
   const user = useAppSelector(state => state.auth)
-
-  if(user === null) {
-    return <Redirect to='/login' />
-  }
-  console.log(user.avatar);
   
   return (
     <>

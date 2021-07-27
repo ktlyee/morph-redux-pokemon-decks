@@ -5,7 +5,6 @@ import { useAppDispatch } from '../app/hooks'
 import { register } from "../reducers/auth";
 import "../styles/register.css";
 import { Button } from "../components";
-import { Redirect } from 'react-router-dom'
 
 interface MyFormValues {
   username: string;
@@ -59,15 +58,15 @@ const Register = (props: any) => {
                     accept="image/*"
                     name="avatar"
                     onChange={(e) =>{
-                      let previewImg = document.querySelector('#previewImg') as HTMLImageElement;
-                      let previewIcon = document.querySelector('#previewIcon') as HTMLElement;
-                      const [file]: any = e.target.files;
-                      if (file && previewImg){
-                        previewImg.src = URL.createObjectURL(file)
-                        previewImg.style.display = ''
-                        previewIcon.style.display = 'none'
-                      }
-                      formProps.setFieldValue("avatar", URL.createObjectURL(file))
+                        let previewImg = document.querySelector('#previewImg') as HTMLImageElement;
+                        let previewIcon = document.querySelector('#previewIcon') as HTMLElement;
+                        const [file]: any = e.target.files;
+                        if (file && previewImg){
+                          previewImg.src = URL.createObjectURL(file)
+                          previewImg.style.display = ''
+                          previewIcon.style.display = 'none'
+                        }
+                        formProps.setFieldValue("avatar", URL.createObjectURL(file))
                       }
                     }
                   />
