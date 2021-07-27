@@ -24,9 +24,9 @@ function Login(props: any) {
         }
     }
 
-    if (user !== null) {
-        return <Redirect to='/' />
-    }
+    // if (user !== null) {
+    //     return <Redirect to='/' />
+    // }
 
     return (
         <div className='min-h-screen bg-white-smoke flex-col justify-center py-12 sm:px-6 lg:px-8'>

@@ -26,7 +26,7 @@ const Register = (props: any) => {
 
   const handleRegister = (values: object) => {
     dispatch(register(values))
-    props.history.push("/")
+    props.history.push("/home")
   }
 
   return (
