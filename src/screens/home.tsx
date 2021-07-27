@@ -5,6 +5,7 @@ import { pokemon } from "../testComponent";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import "../styles/home.css";
 import axios from "axios";
+import { Idata } from "../components/Cards/Show";
 
 const goInfo = () => {
   return console.log("click Info");
@@ -14,17 +15,29 @@ const clickFav = () => {
   return console.log("click Fav");
 };
 
-const handleClick = ({}) => {
-  axios.get("https://pokeapi.co/api/v2/pokemon?limit=6&offset=1").then((res) => {
-    console.log(res.data);
-    console.log(res.data.results);
-  }) 
-}
-
 const Homepage = () => {
   const [enabled, setEnabled] = useState(false);
-
+  let cardMax: number = 4
+  let resData: Idata[] 
   const user = useAppSelector(state => state.auth)
+
+  const handleClick = async () => {
+    await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${cardMax}&offset=1`).then((res) => {
+      const api = res.data;
+      console.log(api.results);
+      for (let index = 0; index < cardMax; index++) {
+        resData.push({
+          id: index.toString(),
+          name: api.results[index].name,
+          isFav: true,
+          imageUrl:
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png",
+          bgCard: 'bg-purple'
+        })
+      }
+    })
+    return resData;
+  }
   
   return (
     <>
