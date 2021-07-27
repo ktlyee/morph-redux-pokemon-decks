@@ -77,6 +77,7 @@ const Register = (props: any) => {
                   Username
                 <Field
                   id="username"
+                  type="text"
                   name="username"
                   placeholder="Username"
                   className="input"
@@ -86,6 +87,7 @@ const Register = (props: any) => {
                   E-mail
                 <Field
                   id="email"
+                  type="email"
                   name="email"
                   placeholder="E-mail"
                   className="input"
@@ -95,6 +97,7 @@ const Register = (props: any) => {
                   Password
                 <Field
                   id="password"
+                  type="password"
                   name="password"
                   placeholder="Password"
                   className="input"
