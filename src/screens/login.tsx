@@ -25,7 +25,7 @@ function Login(props: any) {
     }
 
     if (user !== null) {
-        return <Redirect to='/home' />
+        return <Redirect to='/' />
     }
 
     return (

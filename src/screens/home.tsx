@@ -20,7 +20,7 @@ const Homepage = () => {
   const user = useAppSelector(state => state.auth)
 
   if(user === null) {
-    return <Redirect to='/' />
+    return <Redirect to='/login' />
   }
 
   return (
