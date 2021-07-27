@@ -12,9 +12,9 @@ function App() {
     <BrowserRouter>
     <div className="App">
           <Switch>
-            <Route exact path="/home" component={Homepage} />
+            <Route exact path="/" component={Homepage} />
             <Route exact path="/register" component={Register} />
-            <Route exact path="/" component={Login} />
+            <Route exact path="/login" component={Login} />
             {/* <Route path="/test-component" component={TestComponent}/> */}
           </Switch>
       {/* <header className="App-header">
