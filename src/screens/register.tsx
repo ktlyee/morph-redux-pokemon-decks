@@ -1,24 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
 import { PlusIcon } from "@heroicons/react/outline";
-import { Formik, Field, Form } from "formik";
-import { useAppDispatch } from '../app/hooks'
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import * as Yup from 'yup';
+import { useAppDispatch } from '../app/hooks';
 import { register } from "../reducers/auth";
 import "../styles/register.css";
 import { Button } from "../components";
 
-interface MyFormValues {
+interface FormValues {
   username: string;
   email: string;
   password: string;
   avatar: any;
 }
 
-const initialValues: MyFormValues = {
+const initialValues: FormValues = {
   username: "",
   email: "",
   password: "",
   avatar: {}
 }
+
+const RegisterSchema = Yup.object().shape({
+  username: Yup.string().required('Required'),
+  email: Yup.string().email('Invalid email').required('Required'),
+  password: Yup.string()
+    .min(5, 'Too Short for password')
+    .max(20, 'Too Long for password')
+    .required('Required'),
+})
 
 const Register = (props: any) => {
   const dispatch = useAppDispatch()
@@ -34,14 +44,13 @@ const Register = (props: any) => {
       <div className="card-container md:flex p-8 md:p-0">
         <Formik
           initialValues={initialValues}
+          validationSchema={RegisterSchema}
           onSubmit={(values, actions) => {
             handleRegister(values)
-            console.log({ values, actions });
-            // alert(JSON.stringify(values, null, 2));
-            actions.setSubmitting(false);
+            actions.setSubmitting(false)
           }}
         >
-          {(formProps) => (
+          {(formProps: any) => (
             <Form className="px-8 py-10 h-full">
               <div className="regis-avatar-img hover:border-transparent hover:shadow-lg border-4 border-dashed border-gray-400">
                 <label
@@ -75,33 +84,36 @@ const Register = (props: any) => {
               <div className="text-justify space-y-4">
                 <label htmlFor="userName" className="label-form">
                   Username
-                <Field
-                  id="username"
-                  type="text"
-                  name="username"
-                  placeholder="Username"
-                  className="input"
-                />
+                  <Field
+                    id="username"
+                    type="text"
+                    name="username"
+                    placeholder="Username"
+                    className="input"
+                  />
+                  <ErrorMessage component='div' className='text-red-dark text-xs -mt-2' name='username' />
                 </label>
                 <label htmlFor="email" className="label-form">
                   E-mail
-                <Field
-                  id="email"
-                  type="email"
-                  name="email"
-                  placeholder="E-mail"
-                  className="input"
-                />
+                  <Field
+                    id="email"
+                    type="email"
+                    name="email"
+                    placeholder="E-mail"
+                    className="input"
+                  />
+                  <ErrorMessage component='div' className='text-red-dark text-xs -mt-2' name='email' />
                 </label>
                 <label htmlFor="password" className="label-form">
                   Password
-                <Field
-                  id="password"
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  className="input"
-                />
+                  <Field
+                    id="password"
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    className="input"
+                  />
+                  <ErrorMessage component='div' className='text-red-dark text-xs -mt-2' name='password' />
                 </label>
               </div>
               <div>
@@ -113,7 +125,6 @@ const Register = (props: any) => {
                   buttonColor="bg-blue"
                   hoverButton="hover:bg-blue-dark hover:text-yellow"
                   borderColor="border-4 border-blue-dark rounded-lg"
-                  // handleClick={() => props.history.push("/home")}
                 />
               </div>
             </Form>
