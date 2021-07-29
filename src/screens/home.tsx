@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { Avatar, InputWithChild, Toggle, CardShow, Pagination } from "../components";
+import React, { useEffect, useState } from "react";
 import { QuestionMarkCircleIcon } from "@heroicons/react/solid";
-import { pokemon } from "../testComponent";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import "../styles/home.css";
 import axios from "axios";
+
+import { Avatar, InputWithChild, Toggle, CardShow, Pagination } from "../components";
+import { pokemon } from "../testComponent";
 import { Idata } from "../components/Cards/Show";
 
 const goInfo = () => {
@@ -17,27 +18,56 @@ const clickFav = () => {
 
 const Homepage = () => {
   const [enabled, setEnabled] = useState(false);
-  let cardMax: number = 4
-  let resData: Idata[] 
+  const [allData, setAllData] = useState();
+  const [card, setCard] = useState(pokemon);
   const user = useAppSelector(state => state.auth)
 
-  const handleClick = async () => {
-    await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${cardMax}&offset=1`).then((res) => {
+  let cardMax: number = 12
+
+  useEffect(() => {
+    axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${cardMax}&offset=1`)
+    .then((res) => {
       const api = res.data;
       console.log(api.results);
-      for (let index = 0; index < cardMax; index++) {
-        resData.push({
-          id: index.toString(),
-          name: api.results[index].name,
-          isFav: true,
-          imageUrl:
-            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png",
-          bgCard: 'bg-purple'
-        })
-      }
+      getPokemonData(api.results)
     })
-    return resData;
+  }, [])
+
+  const getPokemonData = async (result: any) => {
+    const pokemonArr: any = [];
+        await Promise.all(
+            result.map((pokemonItem: any) => {
+                return axios
+                    .get(`https://pokeapi.co/api/v2/pokemon/${pokemonItem.name}`)
+                    .then((result) => {
+                      // console.log(result.data);
+                      pokemonArr.push(result.data);
+                    });
+            })
+        );
+        console.log(pokemonArr);
+        setAllData(pokemonArr)
+        await setCardData(allData);
   }
+
+  const setCardData = (allData: any) => {
+    let count = 0;
+    const cardArr: any = [];
+    console.log(allData);
+    allData.forEach((element: any) => {
+      let card = {
+        id: count.toString(),
+        name: element.species.name as string,
+        isFav: false,
+        imageUrl: element.sprites.front_default as string,
+        bgCard: 'bg-purple'
+    }
+    cardArr.push(card)
+    count++;
+    });
+    setCard(cardArr)
+  }
+
   
   return (
     <>
@@ -86,7 +116,7 @@ const Homepage = () => {
             }}
             RigthChild={
               <button className="absolute inset-y-0 right-0 pt-1 pr-3 flex items-center cursor-pointer">
-                <a href="#" onClick={handleClick}>
+                <a href="#">
                   <QuestionMarkCircleIcon
                     className="w-7 h-7 text-blue-dark"
                     aria-hidden="true"
@@ -98,7 +128,7 @@ const Homepage = () => {
         </div>
       </div>
       <div className="p-14 mb-14">
-        <CardShow showData={pokemon} handleInfo={goInfo} handleFav={clickFav} />
+        <CardShow showData={card} handleInfo={goInfo} handleFav={clickFav} />
       </div>
       <p>{user.email}</p>
       <div>
