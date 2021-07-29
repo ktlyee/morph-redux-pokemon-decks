@@ -68,7 +68,7 @@ function Login(props: any) {
                                     placeholder='you@example.com'
                                     className='mt-1 appearance-none block w-full px-4 py-3 border border-transparent focus:outline-none rounded-lg shadow-sm focus:ring-1 focus:ring-blue focus:border-blue sm:text-sm'
                                 />
-                                <ErrorMessage component='div' className='text-red-dark text-xs text-left mt-2' name='email' />
+                                <ErrorMessage component='div' className='text-red-dark text-xs text-left mt-1' name='email' />
                             </div>
                             <div>
                                 <label
@@ -84,7 +84,7 @@ function Login(props: any) {
                                     placeholder='password'
                                     className='mt-1 appearance-none block w-full px-4 py-3 border border-transparent focus:outline-none rounded-lg shadow-sm focus:ring-1 focus:ring-blue focus:border-blue sm:text-sm'
                                 />
-                                <ErrorMessage component='div' className='text-red-dark text-xs text-left mt-2' name='password' />
+                                <ErrorMessage component='div' className='text-red-dark text-xs text-left mt-1' name='password' />
                             </div>
                             <div>
                                 <Button 
@@ -94,7 +94,7 @@ function Login(props: any) {
                                     borderColor='border-2 border-blue-dark rounded-lg'
                                     hoverButton='hover:bg-blue-dark'
                                     size='full'
-                                    positionStyle='mt-9'
+                                    positionStyle='mt-7'
                                 />
                             </div>
                         </Form>

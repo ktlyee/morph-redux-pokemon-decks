@@ -6,6 +6,7 @@ import { useAppDispatch } from '../app/hooks';
 import { register } from "../reducers/auth";
 import "../styles/register.css";
 import { Button } from "../components";
+import { useAppSelector } from "../app/hooks";
 
 interface FormValues {
   username: string;
@@ -31,11 +32,16 @@ const RegisterSchema = Yup.object().shape({
 })
 
 const Register = (props: any) => {
+  const user = useAppSelector(state => state.auth)
   const dispatch = useAppDispatch()
 
-  const handleRegister = (values: object) => {
-    dispatch(register(values))
-    props.history.push("/home")
+  const handleRegister = (values: object, email: string) => {
+    if(email === user.email) {
+      alert('This email has already exist')
+    } else {
+      dispatch(register(values))
+      props.history.push("/home")
+    }
   }
 
   return (
@@ -46,7 +52,7 @@ const Register = (props: any) => {
           initialValues={initialValues}
           validationSchema={RegisterSchema}
           onSubmit={(values, actions) => {
-            handleRegister(values)
+            handleRegister(values, values.email)
             actions.setSubmitting(false)
           }}
         >
@@ -91,7 +97,7 @@ const Register = (props: any) => {
                     placeholder="Username"
                     className="input"
                   />
-                  <ErrorMessage component='div' className='text-red-dark text-xs -mt-2' name='username' />
+                  <ErrorMessage component='div' className='text-red-dark text-xs -mt-3' name='username' />
                 </label>
                 <label htmlFor="email" className="label-form">
                   E-mail
@@ -102,7 +108,7 @@ const Register = (props: any) => {
                     placeholder="E-mail"
                     className="input"
                   />
-                  <ErrorMessage component='div' className='text-red-dark text-xs -mt-2' name='email' />
+                  <ErrorMessage component='div' className='text-red-dark text-xs -mt-3' name='email' />
                 </label>
                 <label htmlFor="password" className="label-form">
                   Password
@@ -113,7 +119,7 @@ const Register = (props: any) => {
                     placeholder="Password"
                     className="input"
                   />
-                  <ErrorMessage component='div' className='text-red-dark text-xs -mt-2' name='password' />
+                  <ErrorMessage component='div' className='text-red-dark text-xs -mt-3' name='password' />
                 </label>
               </div>
               <div>
