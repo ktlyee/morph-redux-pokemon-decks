@@ -2,7 +2,7 @@ import React from "react";
 import './cardShow.css'
 import { InformationCircleIcon, HeartIcon } from "@heroicons/react/solid";
 
-interface Idata {
+export interface Idata {
   id: string
   name: string
   isFav: boolean
