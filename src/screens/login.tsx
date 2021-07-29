@@ -41,8 +41,6 @@ function Login(props: any) {
                         initialValues={initialValues}
                         onSubmit={(values, actions) => {
                             handleLogin(values.email, values.password)
-                            // console.log({ values, actions });
-                            // alert(JSON.stringify(values, null, 2));
                             actions.setSubmitting(false);
                         }}
                     >

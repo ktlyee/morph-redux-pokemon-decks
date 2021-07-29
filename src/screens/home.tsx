@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Avatar, InputWithChild, Toggle, CardShow, Pagination } from "../components";
+import axios from "axios";
 import { QuestionMarkCircleIcon } from "@heroicons/react/solid";
+
+import { Avatar, InputWithChild, Toggle, CardShow, Pagination } from "../components";
 import { pokemon } from "../testComponent";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import "../styles/home.css";
-import axios from "axios";
 
 const goInfo = () => {
   return console.log("click Info");
