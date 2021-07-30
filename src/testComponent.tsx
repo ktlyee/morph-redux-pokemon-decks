@@ -96,18 +96,7 @@ const TestComponent = () => {
               focusStyle:
                 "focus:ring-2 focus:ring-blue-darkest focus:border-blue-dark",
             }}
-            isCheckValid={false}
-            CheckValidation={{
-              ariaInvalid: false,
-              defaultValue: "asdfgg",
-              ariaDescribedby: "input-error",
-            }}
-            invalidText={{
-              text: "Invalid search",
-              style: "mt-2 text-sm text-red",
-              id: "input-error",
-            }}
-            RigthChild={
+            RightChild={
               <button className="absolute inset-y-0 right-0 pt-1 pr-3 flex items-center cursor-pointer">
                 <a href="#">
                   <QuestionMarkCircleIcon

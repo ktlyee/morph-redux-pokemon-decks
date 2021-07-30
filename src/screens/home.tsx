@@ -28,6 +28,7 @@ const Homepage = () => {
   const [enabled, setEnabled] = useState(false)
   const [allData, setAllData] = useState([])
   const [card, setCard] = useState(pokemon)
+  const [page, setPage] = useState(1)
   const [filteredData,setFilteredData] = useState(allData)
   const user = useAppSelector(state => state.auth)
 
@@ -36,11 +37,13 @@ const Homepage = () => {
   useEffect(() => {
     try {
       axios
-        .get(`https://pokeapi.co/api/v2/pokemon?limit=${cardMax}&offset=1`)
+        .get(`https://pokeapi.co/api/v2/pokemon?limit=${cardMax}&offset=${page}`)
         .then(async (res) => {
           const api = res.data;
           console.log(api.results);
-          await getPokemonData(api.results);
+          let pokemonArr = await getPokemonData(api.results);
+          setAllData(pokemonArr);
+          setCardData(allData);
         });
     } catch (err) {
       console.error(err.message);
@@ -61,8 +64,7 @@ const Homepage = () => {
     );
     pokemonArr.sort((a: any, b: any) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0))
     console.log(pokemonArr);
-    setAllData(pokemonArr);
-    setCardData(allData);
+    return pokemonArr;
   };
 
   const setCardData = (allData: any) => {
@@ -83,6 +85,17 @@ const Homepage = () => {
     setCard(cardArr);
   };
 
+  const handlePagePrev = () => {
+    console.log('page -1');
+    setPage(page-1)
+  }
+
+  const handlePageNext = () => {
+    console.log('page +1');
+    setPage(page+1)
+    console.log(page);
+  }
+
   const handleSearch = (event: any) => {
     let value = event.target.value.toLowerCase()
     let result = []
@@ -94,10 +107,10 @@ const Homepage = () => {
   }
 
   return (
-    <>
+    <div className="container m-0 p-0">
       <header className="Home-header grid grid-cols-1">
         <div className="p-5 col-start-1">
-          <Toggle enabled={enabled} setEnabled={() => setEnabled(!enabled)} />
+       <Toggle enabled={enabled} setEnabled={() => setEnabled(!enabled)} />
         </div>
         <div>
           <img
@@ -159,23 +172,28 @@ const Homepage = () => {
             ))
           }
         </div> 
-        {/* <CardShow showData={card} handleInfo={goInfo} handleFav={clickFav} /> */}
+        <CardShow showData={card} handleInfo={goInfo} handleFav={clickFav} />
       </div>
       <div className="p-14">
         <Pagination
-          pages={[{ pageNumber: 1, href: "", currentPage: true }]}
+          pages={[
+          { pageNumber: 1, href: "", currentPage: true },
+          { pageNumber: 2, href: "", currentPage: false },
+          { pageNumber: 3, href: "", currentPage: false },
+          { pageNumber: 4, href: "", currentPage: false },
+        ]}
           text={{
             textColor: "",
             fontWeight: "font-medium",
             fontSize: "text-sm",
           }}
           borderColor=""
-          activePage="1"
-          prevButton={() => {}}
-          nextButton={() => {}}
+          activePage="border-gray-500 text-gray-600"
+          prevButton={handlePagePrev}
+          nextButton={handlePageNext}
         />
       </div>
-    </>
+    </div>
   );
 };
 
