@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { MailIcon, QuestionMarkCircleIcon } from "@heroicons/react/solid";
-import { Avatar, InputWithChild, Toggle, CardShow } from "./components";
+import { Avatar, InputWithChild, Toggle, CardShow, Button } from "./components";
 import axios from "axios";
 
-const pokemon = [
+export const pokemon = [
   {
     id: "1",
     name: "Pokemon1",
@@ -30,6 +30,22 @@ const pokemon = [
   },
   {
     id: "4",
+    name: "Pokemon4",
+    isFav: false,
+    imageUrl:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png",
+    bgCard: 'bg-purple'  
+  },
+  {
+    id: "5",
+    name: "Pokemon3",
+    isFav: false,
+    imageUrl:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png",
+    bgCard: 'bg-purple'
+  },
+  {
+    id: "6",
     name: "Pokemon4",
     isFav: false,
     imageUrl:
@@ -108,6 +124,13 @@ const TestComponent = () => {
         <CardShow showData={pokemon} handleInfo={goInfo} handleFav={clickFav}/>
       </div>
       <button className="h-10 w-20 text-white bg-blue-dark rounded-md hover:bg-blue-dark" onClick={handleClick}> Test this </button>
+      {/* <h3>{currentUser.username} Profile</h3>
+      <p>Email: {currentUser.email}</p> */}
+      <Button 
+        text={{text: 'Log out', color: 'text-blue'}}
+        buttonColor='bg-yellow'
+        // handleClick={logOut}
+      />
     </>
   );
 };

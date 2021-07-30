@@ -1,32 +1,19 @@
 import React, { useState } from "react";
 import "./App.css";
-import { TestComponent } from "./testComponents"
+import Register from "./screens/register"
+import Login from "./screens/login"
+import { Route, Switch } from "react-router-dom"
+import { NavLink } from "react-router-dom"
+import Homepage from "./screens/home";
 
 function App() {
   return (
     <div className="App">
-      <TestComponent/>
-      <header className="App-header">
-        <p className="font-press-start">
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
+      <Switch>
+        <Route exact path="/home" component={Homepage} />
+        <Route exact path="/register" component={Register} />
+        <Route exact path="/" component={Login} />
+      </Switch>
     </div>
   );
 }
