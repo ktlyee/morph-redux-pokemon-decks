@@ -76,26 +76,26 @@ export const InfoCard = ({
     const completeButtonRef = useRef(null)
 
     return (
-        <Transition.Root show={isOpen} as={Fragment}>
-            <Dialog
-                as="div" 
-                static 
-                className='fixed z-10 inset-0 overflow-y-auto' 
-                initialFocus={completeButtonRef}
-                open={isOpen} 
-                onClose={handleClose}
-            >
+        // <Transition.Root show={isOpen} as={Fragment}>
+            // <Dialog
+            //     as="div" 
+            //     static 
+            //     className='fixed z-10 inset-0 overflow-y-auto' 
+            //     initialFocus={completeButtonRef}
+            //     open={isOpen} 
+            //     onClose={handleClose}
+            // >
                 <div className='flex items-center px-6 justify-center min-h-screen text-center sm:block sm:p-0'>
-                    <Transition.Child as={Fragment}>
+                    {/* <Transition.Child as={Fragment}>
                         <Dialog.Overlay className='fixed inset-0 bg-white-smoke transition-opacity' />
-                    </Transition.Child>
+                    </Transition.Child> */}
 
                     {/* This element is to trick the browser into centering the modal contents. */}
                     <span className='hidden sm:inline-block sm:align-middle sm:h-screen' aria-hidden='true'>
                         &#8203;
                     </span>
 
-                    <Transition.Child as={Fragment}>
+                    {/* <Transition.Child as={Fragment}> */}
                         <div className={`m-4 py-5 px-4 inline-block ${cardColor} rounded-3xl text-left shadow-xl transform transition-all sm:align-middle sm:p-6 sm:w-10/12 md:w-10/12 lg:w-7/12 xl:w-7/12`}>
                             <div className="sm:block absolute top-0 right-0 pt-4 pr-4">
                                 <button
@@ -212,10 +212,10 @@ export const InfoCard = ({
                                 </div>
                             </div>
                         </div>
-                    </Transition.Child>
+                    {/* </Transition.Child> */}
                 </div>
-            </Dialog>
-        </Transition.Root>   
+            // </Dialog>
+        // </Transition.Root>   
     )
 }
 
