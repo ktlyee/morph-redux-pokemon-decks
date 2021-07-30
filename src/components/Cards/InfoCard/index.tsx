@@ -14,32 +14,6 @@ interface ITag {
     backgroundColor: string
 }
 
-interface IType {
-    src: string
-    backgroundColor: string
-    tooltip: string
-}
-
-interface IAbility {
-    ability: string
-}
-
-interface IBaseStats {
-    attack: string
-    defense: string
-    hp: string
-    specialAttack: string
-    specialDefense: string
-    speed: string
-}
-
-interface IEvolution {
-    src: string
-    alt: string
-    href: string
-    name: string
-}
-
 interface InfoCardProps {
     cardColor: string
     pokemonImg: IPokemonImg
@@ -47,11 +21,10 @@ interface InfoCardProps {
     id: string
     name: string
     tag: ITag
-    types: IType[]
     about: string
-    abilities: IAbility[]
-    baseStats: IBaseStats
-    evolution: IEvolution[],
+    abilities: Array<string>
+    baseStats: Array<any>
+    evolution: Array<any>
     circleColor: string
     isOpen: boolean
     handleClose: () => void
@@ -64,7 +37,6 @@ export const InfoCard = ({
     id,
     name,
     tag,
-    types,
     about,
     abilities,
     baseStats,
@@ -76,26 +48,26 @@ export const InfoCard = ({
     const completeButtonRef = useRef(null)
 
     return (
-        // <Transition.Root show={isOpen} as={Fragment}>
-            // <Dialog
-            //     as="div" 
-            //     static 
-            //     className='fixed z-10 inset-0 overflow-y-auto' 
-            //     initialFocus={completeButtonRef}
-            //     open={isOpen} 
-            //     onClose={handleClose}
-            // >
+        <Transition.Root show={isOpen} as={Fragment}>
+            <Dialog
+                as="div" 
+                static 
+                className='fixed z-10 inset-0 overflow-y-auto' 
+                initialFocus={completeButtonRef}
+                open={isOpen} 
+                onClose={handleClose}
+            >
                 <div className='flex items-center px-6 justify-center min-h-screen text-center sm:block sm:p-0'>
-                    {/* <Transition.Child as={Fragment}>
+                    <Transition.Child as={Fragment}>
                         <Dialog.Overlay className='fixed inset-0 bg-white-smoke transition-opacity' />
-                    </Transition.Child> */}
+                    </Transition.Child>
 
                     {/* This element is to trick the browser into centering the modal contents. */}
                     <span className='hidden sm:inline-block sm:align-middle sm:h-screen' aria-hidden='true'>
                         &#8203;
                     </span>
 
-                    {/* <Transition.Child as={Fragment}> */}
+                    <Transition.Child as={Fragment}>
                         <div className={`m-4 py-5 px-4 inline-block ${cardColor} rounded-3xl text-left shadow-xl transform transition-all sm:align-middle sm:p-6 sm:w-10/12 md:w-10/12 lg:w-7/12 xl:w-7/12`}>
                             <div className="sm:block absolute top-0 right-0 pt-4 pr-4">
                                 <button
@@ -112,15 +84,15 @@ export const InfoCard = ({
                                     <div className='inline-flex items-center'>
                                         <img src={`${pokemonImg.src}`} alt={`${pokemonImg.alt}`} className='h-36 w-36 rounded-2xl mx-4' />
                                         <div>
-                                            <p className='text-2xl font-normal font-quicksand'>{id}</p>
-                                            <p className='text-lg font-press-start pt-2'>{name}</p>
+                                            <p className='text-2xl font-normal font-quicksand'>#{id}</p>
+                                            <p className='text-lg font-press-start pt-2 uppercase'>{name}</p>
                                             <div className='space-x-2 flex flex-wrap items-center mt-5'>
                                                 <BasicBadge 
                                                     text={`${tag.text}`} 
                                                     textStyle='text-xl leading-8 font-medium text-white font-vt323' 
                                                     backgroundColor={`${tag.backgroundColor}`}
                                                 />
-                                                {
+                                                {/* {
                                                     types.map((type, index) => (
                                                         <CircularBadge 
                                                             key={index}
@@ -129,7 +101,7 @@ export const InfoCard = ({
                                                             tooltip={`${type.tooltip}`}
                                                         />
                                                     ))
-                                                }
+                                                } */}
                                             </div>
                                         </div>
                                     </div>
@@ -144,41 +116,26 @@ export const InfoCard = ({
                                 <div className='flex flex-col sm:grid sm:gap-x-5 sm:grid-flow-col'>
                                     <div className={`mt-5 border border-transparent rounded-2xl px-5 py-3 ${backgroudTextColor}`}>
                                         <p className='text-topic'>Abilities</p>
-                                        <div className='mt-3 px-3 space-y-2 ftext-detail'>
+                                        <div className='mt-3 px-3 space-y-2 text-detail'>
                                             {
-                                                abilities.map((ability, index) => (
-                                                    <li key={index}>{ability.ability}</li>
-                                                ))
+                                                abilities.map((ability: any, index: number) => {
+                                                    let abilities = (ability).charAt(0).toUpperCase() + (ability).slice(1)
+                                                    return <li key={index}>{abilities}</li>
+                                                })
                                             }
                                         </div>
                                     </div> 
                                     <div className={`mt-5 border border-transparent rounded-2xl px-5 py-3 ${backgroudTextColor}`}>
                                         <p className='text-topic'>Base Stats</p>
                                         <div className='grid grid-cols-3 mt-2'>
-                                            <div>
-                                                <p className='base-stats-title'>ATTACK</p>
-                                                <p className='base-stats-value'>{baseStats.attack}</p>
-                                            </div>
-                                            <div>
-                                                <p className='base-stats-title'>DEFENSE</p>
-                                                <p className='base-stats-value'>{baseStats.defense}</p>
-                                            </div>
-                                            <div>
-                                                <p className='base-stats-title'>HP</p>
-                                                <p className='base-stats-value'>{baseStats.hp}</p>
-                                            </div>
-                                            <div>
-                                                <p className='base-stats-title'>SPECIAL-ATTACK</p>
-                                                <p className='base-stats-value'>{baseStats.specialAttack}</p>
-                                            </div>
-                                            <div>
-                                                <p className='base-stats-title'>SPECIAL-DEFENSE</p>
-                                                <p className='base-stats-value'>{baseStats.specialDefense}</p>
-                                            </div>
-                                            <div>
-                                                <p className='base-stats-title'>SPEED</p>
-                                                <p className='base-stats-value'>{baseStats.speed}</p>
-                                            </div>
+                                            {
+                                                baseStats.map((stat: any) => (
+                                                    <div key={stat.statName}>
+                                                        <p className='base-stats-title'>{stat.statName.toUpperCase()}</p>
+                                                        <p className='base-stats-value'>{stat.statVal}</p>
+                                                    </div>
+                                                ))
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -195,14 +152,11 @@ export const InfoCard = ({
                                                         </div>
                                                     }
                                                     <div key={index} className='flex flex-col'>
-                                                        <a 
-                                                            href={`${pokemon.href}`} 
-                                                            className={`${circleColor} inline-flex items-center p-4 border border-transparent rounded-full shadow-lg transition duration-500 ease-in-out transform hover:scale-110`}
-                                                        >
-                                                            <img src={pokemon.src} alt={pokemon.alt} className='h-20 w-20' />
-                                                        </a>
+                                                        <div className={`${circleColor} inline-flex items-center p-4 border border-transparent rounded-full shadow-lg transition duration-500 ease-in-out transform hover:scale-110`}>
+                                                            <img src={pokemon.imageUrl} alt='pic' className='h-20 w-20' />
+                                                        </div>
                                                         <div className='text-center mt-2'>
-                                                            <p className='text-xl font-vt323 pl-3'>{pokemon.name}</p>
+                                                            <p className='text-xl font-vt323 pl-3'>{pokemon.speciesName}</p>
                                                         </div>
                                                     </div> 
                                                 </>    
@@ -212,10 +166,10 @@ export const InfoCard = ({
                                 </div>
                             </div>
                         </div>
-                    {/* </Transition.Child> */}
+                    </Transition.Child>
                 </div>
-            // </Dialog>
-        // </Transition.Root>   
+            </Dialog>
+        </Transition.Root>   
     )
 }
 

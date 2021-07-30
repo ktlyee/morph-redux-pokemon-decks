@@ -8,10 +8,6 @@ import { Avatar, InputWithChild, Toggle, CardShow, Pagination } from "../compone
 import { pokemon } from "../testComponent";
 // import { Idata } from "../components/Cards/Show";
 
-const goInfo = () => {
-  return console.log("click Info");
-};
-
 const clickFav = () => {
   return console.log("click Fav");
 };
@@ -131,9 +127,8 @@ const Homepage = () => {
               <div key={index}>
                 <CardShow 
                   showData={[
-                    { id: `${index}`, name: `${data.name}`, isFav: false, imageUrl: `${data.sprites.front_default}`, bgCard: 'bg-yellow'}
+                    { id: `${index}`, name: `${data.name}`, isFav: false, imageUrl: `${data.sprites.other.dream_world.front_default}`, bgCard: 'bg-yellow'}
                   ]} 
-                  handleInfo={goInfo} 
                   handleFav={clickFav} 
                 />
               </div> 
@@ -142,7 +137,6 @@ const Homepage = () => {
         </div> 
         {/* <CardShow showData={card} handleInfo={goInfo} handleFav={clickFav} /> */}
       </div>
-      <p>{user.email}</p>
       <div>
           {/* <Pagination pages={[{pageNumber: 1, href: "", currentPage: true }]} text={} borderColor="" activePage={} prevButton={} nextButton={}/> */}
       </div>
