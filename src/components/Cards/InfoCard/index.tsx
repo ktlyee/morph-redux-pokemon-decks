@@ -156,7 +156,7 @@ export const InfoCard = ({
                                                             <img src={pokemon.imageUrl} alt='pic' className='h-20 w-20' />
                                                         </div>
                                                         <div className='text-center mt-2'>
-                                                            <p className='text-xl font-vt323 pl-3'>{pokemon.speciesName}</p>
+                                                            <p className='text-xl font-vt323 pl-3 capitalize'>{pokemon.speciesName}</p>
                                                         </div>
                                                     </div> 
                                                 </>    

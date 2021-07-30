@@ -1,8 +1,6 @@
-import React, { useState, useEffect, Fragment, useRef } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { BasicBadge, InfoCard } from '../components'
-import { ArrowNarrowRightIcon, XIcon } from '@heroicons/react/outline'
+import { InfoCard } from '../components'
 import '../components/Cards/InfoCard/infoCard.css'
 
 interface CardInfoProps {
@@ -26,7 +24,6 @@ const CardInfoPage = ({
     const [genera, setGenera] = useState('')
     const [stats, setStats] = useState<any>([])
     const [evolution, setEvolution] = useState<any>([])
-    const completeButtonRef = useRef(null)
     
     useEffect(() => {
         axios(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
