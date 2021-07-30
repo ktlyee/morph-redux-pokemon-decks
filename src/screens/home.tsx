@@ -120,14 +120,14 @@ const Homepage = () => {
           />
         </div>
       </div>
-      <div className="p-14 mb-14">
+      <div className="mt-10 mb-14 ml-60">
         <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
           {
             filteredData.map((data: any, index: number) => (
               <div key={index}>
                 <CardShow 
                   showData={[
-                    { id: `${index}`, name: `${data.name}`, isFav: false, imageUrl: `${data.sprites.other.dream_world.front_default}`, bgCard: 'bg-yellow'}
+                    { id: `${index}`, name: `${data.name}`, isFav: false, imageUrl: `${data.sprites.other.dream_world.front_default}`, bgCard: 'bg-purple'}
                   ]} 
                   handleFav={clickFav} 
                 />

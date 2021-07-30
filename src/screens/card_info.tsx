@@ -7,10 +7,6 @@ interface CardInfoProps {
     pokemonName: string
     isOpen: boolean
     handleClose: () => void
-    cardColor?: string
-    backgroudTextColor?: string
-    tagBackgroundColor?: string
-    circleColor?: string
 }
 
 const CardInfoPage = ({ 
@@ -108,7 +104,7 @@ const CardInfoPage = ({
 
     return (
         <InfoCard 
-            cardColor='bg-yellow'
+            cardColor='bg-purple'
             pokemonImg={{ src: `${data.pokemonImage}`, alt: `${data.pokemonName}` }}
             backgroudTextColor='bg-yellow-lightest'
             id={data.pokemonId}
