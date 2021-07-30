@@ -1,12 +1,20 @@
+/*
+ * @TODO: remove console.log statements
+ */
 import React, { useEffect, useState } from "react";
 import { SearchIcon } from "@heroicons/react/solid";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import "../styles/home.css";
 import axios from "axios";
 
-import { Avatar, InputWithChild, Toggle, CardShow, Pagination } from "../components";
+import {
+  Avatar,
+  InputWithChild,
+  Toggle,
+  CardShow,
+  Pagination,
+} from "../components";
 import { pokemon } from "../testComponent";
-// import { Idata } from "../components/Cards/Show";
+import "../styles/home.css";
 
 const goInfo = () => {
   return console.log("click Info");
@@ -19,20 +27,25 @@ const clickFav = () => {
 const Homepage = () => {
   const [enabled, setEnabled] = useState(false)
   const [allData, setAllData] = useState([])
-  // const [card, setCard] = useState(pokemon)
+  const [card, setCard] = useState(pokemon)
   const [filteredData,setFilteredData] = useState(allData)
   const user = useAppSelector(state => state.auth)
 
   let cardMax: number = 20
 
   useEffect(() => {
-    axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${cardMax}&offset=1`)
-    .then((res) => {
-      const api = res.data;
-      console.log(api.results);
-      getPokemonData(api.results)
-    })
-  }, [])
+    try {
+      axios
+        .get(`https://pokeapi.co/api/v2/pokemon?limit=${cardMax}&offset=1`)
+        .then(async (res) => {
+          const api = res.data;
+          console.log(api.results);
+          await getPokemonData(api.results);
+        });
+    } catch (err) {
+      console.error(err.message);
+    }
+  }, []);
 
   const getPokemonData = async (result: any) => {
     const pokemonArr: any = [];
@@ -44,32 +57,31 @@ const Homepage = () => {
             // console.log(result.data);
             pokemonArr.push(result.data);
           });
-        })
+      })
     );
+    pokemonArr.sort((a: any, b: any) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0))
     console.log(pokemonArr);
-    setAllData(pokemonArr)
-    setFilteredData(pokemonArr)
-    // await setCardData(allData);
-  }
+    setAllData(pokemonArr);
+    setCardData(allData);
+  };
 
-  // const setCardData = (allData: any) => {
-  //   let count = 0;
-  //   const cardArr: any = [];
-  //   console.log(allData);
-  //   allData.forEach((element: any) => {
-  //     let card = {
-  //       id: count.toString(),
-  //       name: element.species.name as string,
-  //       isFav: false,
-  //       imageUrl: element.sprites.front_default as string,
-  //       bgCard: 'bg-purple'
-  //     }
-  //     cardArr.push(card)
-  //     count++;
-  //   });
-  //   setCard(cardArr)
-  //   // setFilteredData(cardArr)
-  // }
+  const setCardData = (allData: any) => {
+    let count = 0;
+    const cardArr: any = [];
+    console.log(allData);
+    allData.forEach((element: any) => {
+      let card = {
+        id: count.toString(),
+        name: element.species.name as string,
+        isFav: false,
+        imageUrl: element.sprites.front_default as string,
+        bgCard: "bg-purple",
+      };
+      cardArr.push(card);
+      count++;
+    });
+    setCard(cardArr);
+  };
 
   const handleSearch = (event: any) => {
     let value = event.target.value.toLowerCase()
@@ -97,9 +109,16 @@ const Homepage = () => {
         <div className="p-5 bg-white col-end-7 col-span-2">
           <Avatar
             href="#"
-            src={user.avatar? user.avatar : "https://www.slot1234.com/asset/web/images/icon/icon-default-avatar.png"}
+            src={
+              user.avatar
+                ? user.avatar
+                : "https://www.slot1234.com/asset/web/images/icon/icon-default-avatar.png"
+            }
             text={{ text: "Welcome!", textColor: "text-blue font-bold" }}
-            name={{ text: `${user.username}`, textColor: "text-blue font-bold" }}
+            name={{
+              text: `${user.username}`,
+              textColor: "text-blue font-bold",
+            }}
           />
         </div>
       </header>
@@ -142,9 +161,19 @@ const Homepage = () => {
         </div> 
         {/* <CardShow showData={card} handleInfo={goInfo} handleFav={clickFav} /> */}
       </div>
-      <p>{user.email}</p>
-      <div>
-          {/* <Pagination pages={[{pageNumber: 1, href: "", currentPage: true }]} text={} borderColor="" activePage={} prevButton={} nextButton={}/> */}
+      <div className="p-14">
+        <Pagination
+          pages={[{ pageNumber: 1, href: "", currentPage: true }]}
+          text={{
+            textColor: "",
+            fontWeight: "font-medium",
+            fontSize: "text-sm",
+          }}
+          borderColor=""
+          activePage="1"
+          prevButton={() => {}}
+          nextButton={() => {}}
+        />
       </div>
     </>
   );
