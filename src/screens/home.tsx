@@ -87,12 +87,12 @@ const Homepage = () => {
 
   const handlePagePrev = () => {
     console.log('page -1');
-    setPage(page-1)
+    setPage(page-20)
   }
 
   const handlePageNext = () => {
     console.log('page +1');
-    setPage(page+1)
+    setPage(page+20)
     console.log(page);
   }
 
