@@ -1,51 +1,118 @@
-import React, { Fragment, useRef } from 'react'
+import React, { Fragment, useRef, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { BasicBadge, CircularBadge } from '../..'
+import BasicBadge from '../../Badge/BasicBadge'
 import { ArrowNarrowRightIcon, XIcon } from '@heroicons/react/outline'
 import './infoCard.css'
-
-interface IPokemonImg {
-    src: string
-    alt?: string
-}
-
-interface ITag {
-    text: string
-    backgroundColor: string
-}
+import axios from 'axios'
 
 interface InfoCardProps {
-    cardColor: string
-    pokemonImg: IPokemonImg
-    backgroudTextColor: string
-    id: string
-    name: string
-    tag: ITag
-    about: string
-    abilities: Array<string>
-    baseStats: Array<any>
-    evolution: Array<any>
-    circleColor: string
     isOpen: boolean
+    pokemonName: string
+    cardColor?: string
+    backgroudTextColor?: string
+    tagColor?: string
+    circleColor?: string
     handleClose: () => void
 }
 
 export const InfoCard = ({
-    cardColor,
-    pokemonImg,
-    backgroudTextColor,
-    id,
-    name,
-    tag,
-    about,
-    abilities,
-    baseStats,
-    evolution,
-    circleColor,
     isOpen,
+    pokemonName,
+    cardColor = 'bg-purple',
+    backgroudTextColor = 'bg-yellow-lightest',
+    tagColor = 'bg-blue-light',
+    circleColor = 'bg-yellow',
     handleClose
 }: InfoCardProps) => {
     const completeButtonRef = useRef(null)
+
+    const [data, setData] = useState<any>({})
+    const [abilities, setAbilities] = useState<any>([])
+    const [about, setAbout] = useState('')
+    const [genera, setGenera] = useState('')
+    const [baseStats, setBaseStats] = useState<any>([])
+    const [evolution, setEvolution] = useState<any>([])
+
+    useEffect(() => {
+        axios(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
+        .then((result) => {
+            fetchPokemonData(result.data)
+            fetchPokemonDescription(result.data.name)
+            console.log(result.data)
+        }).catch((error) => {
+            console.log('Error getting data: ' + error)       
+        })
+    }, [])
+
+    const fetchPokemonData = async (response: any) => {
+        const data: any = {}, abilities: any = [], stats: any = []
+
+        data['pokemonId'] = response.id
+        data['pokemonName'] = response.name
+        data['pokemonImage'] = response.sprites.other.dream_world.front_default ? response.sprites.other.dream_world.front_default : response.sprites.other['official-artwork'].front_default
+        setData(data)
+
+        for(let i = 0; i < response.abilities.length; i++) {
+            abilities.push(response.abilities[i].ability.name)
+        }
+        setAbilities(abilities)   
+        
+        for (let i = 0; i < response.stats.length; i++) {
+            const Obj: any = {}
+            Obj['statName'] = response.stats[i].stat.name
+            Obj['statVal'] = response.stats[i].base_stat
+            stats.push(Obj)
+        }
+        console.log(stats)
+        setBaseStats(stats)
+    }
+
+    const fetchPokemonDescription = async (name: string) => {
+        const response: any = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${name}`).catch((err) => console.log('Error: ', err))
+        console.log(response.data)
+        fetchEvolutionDetails(response.data.evolution_chain.url)
+        let about: any, genera: any = ''
+
+        for (let i = 0; i < response.data.flavor_text_entries.length - 1; i++) {
+            if (response.data.flavor_text_entries[i].language.name === 'en') {
+                about = response.data.flavor_text_entries[i].flavor_text
+                break;
+            }
+        }
+        setAbout(about)
+
+        for (let i = 0; i < response.data.genera.length; i++) {
+            if (response.data.genera[i].language.name === "en") {
+                genera = response.data.genera[i].genus;
+                break;
+            }
+        }
+        setGenera(genera)
+    }
+
+    const fetchEvolutionDetails = async (url: string) => {
+        const response: any = await axios.get(url).catch((err) => console.log('Error: ', err))
+        const evoChain = []
+        let evoData = response.data.chain
+
+        do {
+            evoChain.push({
+                "speciesName": evoData.species.name
+            })
+
+            evoData = evoData['evolves_to'][0]
+        } while (!!evoData && evoData.hasOwnProperty('evolves_to'))
+        console.log(evoChain)
+        fetchEvoImages(evoChain)
+    }
+
+    const fetchEvoImages = async (evoChain: any) => {
+        for (let i = 0; i < evoChain.length; i++) {
+            const response: any = await axios.get(`https://pokeapi.co/api/v2/pokemon/${evoChain[i].speciesName}`).catch((err) => console.log('Error: ', err))
+            response.data.sprites.other.dream_world.front_default ? evoChain[i]['imageUrl'] = response.data.sprites.other.dream_world.front_default : evoChain[i]['imageUrl'] = response.data.sprites.other['official-artwork'].front_default
+        }
+        setEvolution(evoChain)
+    }
 
     return (
         <Transition.Root show={isOpen} as={Fragment}>
@@ -82,26 +149,16 @@ export const InfoCard = ({
                                 {/* first row */}
                                 <div className='grid grid-cols-1 xl:grid-cols-2'>
                                     <div className='inline-flex items-center'>
-                                        <img src={`${pokemonImg.src}`} alt={`${pokemonImg.alt}`} className='h-36 w-36 rounded-2xl mx-4' />
-                                        <div>
-                                            <p className='text-2xl font-normal font-quicksand'>#{id}</p>
-                                            <p className='text-lg font-press-start pt-2 uppercase'>{name}</p>
+                                        <img src={data.pokemonImage} alt={data.pokemonName} className='h-36 w-36 rounded-2xl mx-4' />
+                                        <div className='ml-7'>
+                                            <p className='text-2xl font-normal font-quicksand'>#{data.pokemonId}</p>
+                                            <p className='text-lg font-press-start pt-2 uppercase'>{data.pokemonName}</p>
                                             <div className='space-x-2 flex flex-wrap items-center mt-5'>
                                                 <BasicBadge 
-                                                    text={`${tag.text}`} 
-                                                    textStyle='text-xl leading-8 font-medium text-white font-vt323' 
-                                                    backgroundColor={`${tag.backgroundColor}`}
+                                                    text={genera} 
+                                                    textStyle='text-xl leading-8 font-medium text-gray-800 font-vt323' 
+                                                    backgroundColor={tagColor}
                                                 />
-                                                {/* {
-                                                    types.map((type, index) => (
-                                                        <CircularBadge 
-                                                            key={index}
-                                                            src={`${type.src}`} 
-                                                            backgroundColor={`${type.backgroundColor}`}
-                                                            tooltip={`${type.tooltip}`}
-                                                        />
-                                                    ))
-                                                } */}
                                             </div>
                                         </div>
                                     </div>
@@ -144,7 +201,7 @@ export const InfoCard = ({
                                     <p className='text-topic'>Evolution</p>
                                     <div className='mt-4 inline-flex'>
                                         {
-                                            evolution.map((pokemon, index) => (
+                                            evolution.map((pokemon: any, index: number) => (
                                                 <>
                                                     { index !== 0 &&
                                                         <div className='mx-3 my-11'>

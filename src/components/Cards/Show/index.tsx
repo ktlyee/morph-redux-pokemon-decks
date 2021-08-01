@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import './cardShow.css'
 import { InformationCircleIcon, HeartIcon } from "@heroicons/react/solid";
-import CardInfoPage from "../../../screens/card_info";
+import CardInfo from "../CardInfo";
 
 export interface Idata {
   id: string
@@ -25,7 +25,7 @@ const CardShow = ({showData, handleFav}: CardShowProp) => {
         <>
           {
             openCard &&
-            <CardInfoPage pokemonName={showData.name} isOpen={openCard} handleClose={() => setOpenCard(false)} />
+            <CardInfo pokemonName={showData.name} isOpen={openCard} handleClose={() => setOpenCard(false)} />
           }
           <li
             key={showData.id}

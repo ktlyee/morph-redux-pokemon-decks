@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { SearchIcon } from "@heroicons/react/solid";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { useAppSelector } from "../app/hooks";
 import "../styles/home.css";
 import axios from "axios";
 
 import { Avatar, InputWithChild, Toggle, CardShow, Pagination } from "../components";
-import { pokemon } from "../testComponent";
-// import { Idata } from "../components/Cards/Show";
 
 const clickFav = () => {
   return console.log("click Fav");
@@ -15,7 +13,6 @@ const clickFav = () => {
 const Homepage = () => {
   const [enabled, setEnabled] = useState(false)
   const [allData, setAllData] = useState([])
-  // const [card, setCard] = useState(pokemon)
   const [filteredData,setFilteredData] = useState(allData)
   const user = useAppSelector(state => state.auth)
 
@@ -37,7 +34,6 @@ const Homepage = () => {
         return axios
           .get(`https://pokeapi.co/api/v2/pokemon/${pokemonItem.name}`)
           .then((result) => {
-            // console.log(result.data);
             pokemonArr.push(result.data);
           });
         })
@@ -45,27 +41,7 @@ const Homepage = () => {
     console.log(pokemonArr);
     setAllData(pokemonArr)
     setFilteredData(pokemonArr)
-    // await setCardData(allData);
   }
-
-  // const setCardData = (allData: any) => {
-  //   let count = 0;
-  //   const cardArr: any = [];
-  //   console.log(allData);
-  //   allData.forEach((element: any) => {
-  //     let card = {
-  //       id: count.toString(),
-  //       name: element.species.name as string,
-  //       isFav: false,
-  //       imageUrl: element.sprites.front_default as string,
-  //       bgCard: 'bg-purple'
-  //     }
-  //     cardArr.push(card)
-  //     count++;
-  //   });
-  //   setCard(cardArr)
-  //   // setFilteredData(cardArr)
-  // }
 
   const handleSearch = (event: any) => {
     let value = event.target.value.toLowerCase()
@@ -73,7 +49,6 @@ const Homepage = () => {
     result = allData.filter((data: any) => {
         return data.name.search(value) != -1
     })
-    // setCard(result)
     setFilteredData(result)
   }
 
@@ -93,7 +68,7 @@ const Homepage = () => {
         <div className="p-5 bg-white col-end-7 col-span-2">
           <Avatar
             href="#"
-            src={user.avatar? user.avatar : "https://www.slot1234.com/asset/web/images/icon/icon-default-avatar.png"}
+            src="https://www.slot1234.com/asset/web/images/icon/icon-default-avatar.png"
             text={{ text: "Welcome!", textColor: "text-blue font-bold" }}
             name={{ text: `${user.username}`, textColor: "text-blue font-bold" }}
           />
@@ -135,10 +110,6 @@ const Homepage = () => {
             ))
           }
         </div> 
-        {/* <CardShow showData={card} handleInfo={goInfo} handleFav={clickFav} /> */}
-      </div>
-      <div>
-          {/* <Pagination pages={[{pageNumber: 1, href: "", currentPage: true }]} text={} borderColor="" activePage={} prevButton={} nextButton={}/> */}
       </div>
     </>
   );
