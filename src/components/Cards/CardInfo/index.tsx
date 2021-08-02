@@ -123,7 +123,7 @@ export const InfoCard = ({
             >
                 <div className='flex items-center px-6 justify-center min-h-screen text-center sm:block sm:p-0'>
                     <Transition.Child as={Fragment}>
-                        <Dialog.Overlay className='fixed inset-0 bg-white-smoke transition-opacity' />
+                        <Dialog.Overlay className='fixed inset-0 bg-white transition-opacity' />
                     </Transition.Child>
 
                     {/* This element is to trick the browser into centering the modal contents. */}
