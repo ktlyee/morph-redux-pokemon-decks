@@ -14,7 +14,7 @@ const FavoritePage = () => {
                         <div key={key}>
                             <CardShow 
                                 showData={[
-                                    { id: `${index}`, name: `${favorite[key].name}`, imageUrl: `${favorite[key].image}`, bgCard: 'bg-purple', isFav: true}
+                                    { id: `${index}`, name: `${favorite[key].name}`, imageUrl: `${favorite[key].image}`, bgCard: 'bg-purple', key: `${key}`, fav: favorite[key].isFav }
                                 ]} 
                             />
                         </div>

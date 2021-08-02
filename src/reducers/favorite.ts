@@ -13,11 +13,13 @@ const favoriteSlice = createSlice({
             const serialisedState = JSON.stringify(state)
             localStorage.setItem('favorite', serialisedState)
         },
-        // removeFavorite(state, action: PayloadAction<string>) {
-        //     delete state[action.payload]
-        // }
+        removeFavorite(state, action: PayloadAction<string>) {
+            delete state[action.payload]
+            const serialisedState = JSON.stringify(state)
+            localStorage.setItem('favorite', serialisedState)
+        }
     }
 })
 
-export const { addFavorite } = favoriteSlice.actions
+export const { addFavorite, removeFavorite } = favoriteSlice.actions
 export default favoriteSlice.reducer

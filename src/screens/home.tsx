@@ -107,7 +107,7 @@ const Homepage = (props: any) => {
               <div key={index}>
                 <CardShow 
                   showData={[
-                    { id: `${index}`, name: `${data.name}`, imageUrl: `${data.sprites.other.dream_world.front_default}`, bgCard: 'bg-purple', isFav: false}
+                    { id: `${index}`, name: `${data.name}`, imageUrl: `${data.sprites.other.dream_world.front_default}`, bgCard: 'bg-purple' }
                   ]} 
                   // handleFav={() => handleFavorite(`${data.name}`)} 
                 />
