@@ -1,9 +1,10 @@
 import React, { Fragment, useRef, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import BasicBadge from '../../Badge/BasicBadge'
 import { ArrowNarrowRightIcon, XIcon } from '@heroicons/react/outline'
-import './infoCard.css'
 import axios from 'axios'
+
+import BasicBadge from '../../Badge/BasicBadge'
+import './cardInfo.css'
 
 interface InfoCardProps {
     isOpen: boolean
@@ -38,7 +39,6 @@ export const InfoCard = ({
         .then((result) => {
             fetchPokemonData(result.data)
             fetchPokemonDescription(result.data.name)
-            console.log(result.data)
         }).catch((error) => {
             console.log('Error getting data: ' + error)       
         })
@@ -63,13 +63,11 @@ export const InfoCard = ({
             Obj['statVal'] = response.stats[i].base_stat
             stats.push(Obj)
         }
-        console.log(stats)
         setBaseStats(stats)
     }
 
     const fetchPokemonDescription = async (name: string) => {
         const response: any = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${name}`).catch((err) => console.log('Error: ', err))
-        console.log(response.data)
         fetchEvolutionDetails(response.data.evolution_chain.url)
         let about: any, genera: any = ''
 
@@ -102,7 +100,6 @@ export const InfoCard = ({
 
             evoData = evoData['evolves_to'][0]
         } while (!!evoData && evoData.hasOwnProperty('evolves_to'))
-        console.log(evoChain)
         fetchEvoImages(evoChain)
     }
 
