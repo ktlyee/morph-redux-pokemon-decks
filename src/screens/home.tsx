@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { SearchIcon } from "@heroicons/react/solid";
+import { SearchIcon, HeartIcon } from "@heroicons/react/solid";
 import { useAppSelector } from "../app/hooks";
 import "../styles/home.css";
 import axios from "axios";
 
-import { Avatar, InputWithChild, Toggle, CardShow } from "../components";
+import { Avatar, InputWithChild, Toggle, CardShow, Button } from "../components";
 
-const clickFav = () => {
-  return console.log("click Fav");
-};
-
-const Homepage = () => {
+const Homepage = (props: any) => {
   const [enabled, setEnabled] = useState(false)
   const [allData, setAllData] = useState([])
   const [filteredData,setFilteredData] = useState(allData)
@@ -72,8 +68,8 @@ const Homepage = () => {
           />
         </div>
       </header>
-      <div className="p-3 flex items-start justify-start bg-white">
-        <div className="w-full max-w-xs ml-32">
+      <div className="relative inline-flex bg-white w-full">
+        <div className="w-full max-w-xs absolute left-36 top-3">
           <InputWithChild
             input={{
               type: "text",
@@ -92,17 +88,28 @@ const Homepage = () => {
             onChange={(event) => handleSearch(event)}
           />
         </div>
+        <div className='absolute top-6 right-32'>
+          <Button 
+            type='button'
+            text={{ text: 'Favorite Cards', color: 'text-yellow-light font-medium' }}
+            icon={{ icon: <HeartIcon />, color: 'text-yellow-light' }}
+            buttonColor='bg-blue-dark'
+            borderColor='rounded-lg'
+            hoverButton='hover:bg-blue'
+            handleClick={() => props.history.push('/favorite')}
+          />
+        </div>
       </div>
-      <div className="mt-10 mb-14 ml-60">
+      <div className="mt-28 mb-14 ml-60">
         <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
           {
             filteredData.map((data: any, index: number) => (
               <div key={index}>
                 <CardShow 
                   showData={[
-                    { id: `${index}`, name: `${data.name}`, isFav: false, imageUrl: `${data.sprites.other.dream_world.front_default}`, bgCard: 'bg-purple'}
+                    { id: `${index}`, name: `${data.name}`, imageUrl: `${data.sprites.other.dream_world.front_default}`, bgCard: 'bg-purple', isFav: false}
                   ]} 
-                  handleFav={clickFav} 
+                  // handleFav={() => handleFavorite(`${data.name}`)} 
                 />
               </div> 
             ))

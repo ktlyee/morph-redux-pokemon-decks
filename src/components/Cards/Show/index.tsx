@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useAppDispatch } from "../../../app/hooks";
 import './cardShow.css'
 import { InformationCircleIcon, HeartIcon } from "@heroicons/react/solid";
 import CardInfo from "../CardInfo";
+import { addFavorite } from "../../../reducers/favorite";
 
 export interface Idata {
   id: string
@@ -13,11 +15,24 @@ export interface Idata {
 
 export interface CardShowProp {
   showData: Idata[]
-  handleFav: () => void
+  handleFav?: () => void
+}
+
+interface IHandleFavorite {
+  name: string
+  image: string
+  isFav: boolean
 }
 
 const CardShow = ({showData, handleFav}: CardShowProp) => {
+  const dispatch = useAppDispatch()
   const [openCard, setOpenCard] = useState(false)
+  // const [isFav, setIsFav] = useState(false)
+
+  const handleFavorite = (pokemon: IHandleFavorite) => {
+    dispatch(addFavorite(pokemon))
+    // setIsFav(!isFav)
+  }
 
   return (
     <ul className="card-show">
@@ -36,7 +51,7 @@ const CardShow = ({showData, handleFav}: CardShowProp) => {
                 <button className="w-0 flex-1 flex p-2" onClick={() => setOpenCard(true)}>
                   <InformationCircleIcon className="h-7 w-7 text-blue-darkest hover:text-blue"/>
                 </button>
-                <button className="-ml-px w-0 flex-1 flex flex-row-reverse p-2" onClick={handleFav}>
+                <button className="-ml-px w-0 flex-1 flex flex-row-reverse p-2" onClick={() => handleFavorite({name: showData.name, image: showData.imageUrl, isFav: true})}>
                   <HeartIcon className={`h-7 w-7 ${showData.isFav? 'text-red-dark hover:text-red' : ''}`}/>
                 </button>
               </div>
