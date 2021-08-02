@@ -4,7 +4,7 @@ import { useAppSelector } from "../app/hooks";
 import "../styles/home.css";
 import axios from "axios";
 
-import { Avatar, InputWithChild, Toggle, CardShow, Pagination } from "../components";
+import { Avatar, InputWithChild, Toggle, CardShow } from "../components";
 
 const clickFav = () => {
   return console.log("click Fav");
@@ -22,7 +22,6 @@ const Homepage = () => {
     axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${cardMax}&offset=1`)
     .then((res) => {
       const api = res.data;
-      console.log(api.results);
       getPokemonData(api.results)
     })
   }, [])
@@ -34,11 +33,10 @@ const Homepage = () => {
         return axios
           .get(`https://pokeapi.co/api/v2/pokemon/${pokemonItem.name}`)
           .then((result) => {
-            pokemonArr.push(result.data);
+            pokemonArr.push(result.data)
           });
         })
     );
-    console.log(pokemonArr);
     setAllData(pokemonArr)
     setFilteredData(pokemonArr)
   }
