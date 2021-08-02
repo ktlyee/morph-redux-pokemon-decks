@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button } from '../components'
-import { Formik, Form, Field } from 'formik'
+import { Formik, Form, Field, ErrorMessage } from 'formik'
+import * as Yup from 'yup'
 import { Link } from 'react-router-dom'
 import { useAppSelector } from '../app/hooks'
 
@@ -9,6 +10,14 @@ interface FormValues {
     password: string
 }
 
+const LoginSchema = Yup.object().shape({
+    email: Yup.string().email('Invalid email').required('Required'),
+    password: Yup.string()
+      .min(5, 'Too Short for password')
+      .max(20, 'Too Long for password')
+      .required('Required'),
+})
+
 function Login(props: any) {
     const initialValues: FormValues = { email: '', password: '' }
 
@@ -16,7 +25,6 @@ function Login(props: any) {
 
     const handleLogin = (email: string, password: string) => {
         if(email === user.email && password === user.password) {
-            console.log('Logged in successful')
             props.history.push('/home')
         } else {
             return alert('Email and password is not correct')
@@ -39,11 +47,10 @@ function Login(props: any) {
                 <div className='bg-yellow border-4 border-blue-darkest py-5 px-4 shadow rounded-xl sm:px-5' style={{width: "433px", height: "449px"}}>
                     <Formik
                         initialValues={initialValues}
+                        validationSchema={LoginSchema}
                         onSubmit={(values, actions) => {
                             handleLogin(values.email, values.password)
-                            // console.log({ values, actions });
-                            // alert(JSON.stringify(values, null, 2));
-                            actions.setSubmitting(false);
+                            actions.setSubmitting(false)
                         }}
                     >
                         <Form className='space-y-3 py-7 pt-9'>
@@ -61,6 +68,7 @@ function Login(props: any) {
                                     placeholder='you@example.com'
                                     className='mt-1 appearance-none block w-full px-4 py-3 border border-transparent focus:outline-none rounded-lg shadow-sm focus:ring-1 focus:ring-blue focus:border-blue sm:text-sm'
                                 />
+                                <ErrorMessage component='div' className='text-red-dark text-xs text-left mt-1' name='email' />
                             </div>
                             <div>
                                 <label
@@ -76,6 +84,7 @@ function Login(props: any) {
                                     placeholder='password'
                                     className='mt-1 appearance-none block w-full px-4 py-3 border border-transparent focus:outline-none rounded-lg shadow-sm focus:ring-1 focus:ring-blue focus:border-blue sm:text-sm'
                                 />
+                                <ErrorMessage component='div' className='text-red-dark text-xs text-left mt-1' name='password' />
                             </div>
                             <div>
                                 <Button 
@@ -85,28 +94,26 @@ function Login(props: any) {
                                     borderColor='border-2 border-blue-dark rounded-lg'
                                     hoverButton='hover:bg-blue-dark'
                                     size='full'
-                                    positionStyle='mt-9'
+                                    positionStyle='mt-7'
                                 />
                             </div>
                         </Form>
                     </Formik>    
-                    <div className='mt-6'>
-                        <div className="relative">
-                            <div className="absolute inset-0 flex items-center justify-center">
-                                <div className="w-80 border-t border-blue-darkest" />
-                            </div>
-                            <div className="relative flex justify-center text-sm">
-                                <span className='px-2 bg-yellow text-blue-darkest'>Or</span>
-                            </div>
+                    <div className="relative">
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="w-80 border-t border-blue-darkest" />
                         </div>
-                        <div className='mt-2'>
-                            <Link
-                                to='/register'
-                                className='py-6 underline text-blue-darkest font-semibold hover:text-blue-dark'
-                            >
-                                Register here
-                            </Link>
+                        <div className="relative flex justify-center text-sm">
+                            <span className='px-2 bg-yellow text-blue-darkest'>Or</span>
                         </div>
+                    </div>
+                    <div className='mt-2'>
+                        <Link
+                            to='/register'
+                            className='py-6 underline text-blue-darkest font-semibold hover:text-blue-dark'
+                        >
+                            Register here
+                        </Link>
                     </div>
                 </div>
             </div>  
