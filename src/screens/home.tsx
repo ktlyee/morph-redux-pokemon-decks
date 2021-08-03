@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { SearchIcon, HeartIcon } from "@heroicons/react/solid";
-import axios from "axios";
+import React, { useEffect, useState } from 'react'
+import { SearchIcon, HeartIcon } from '@heroicons/react/solid'
+import axios from 'axios'
 
-import { InputWithChild, CardShow, Button, Navbar } from "../components";
+import { InputWithChild, CardShow, Button, Navbar } from '../components'
 
 const Homepage = (props: any) => {
-  const [allData, setAllData] = useState([])
+  const [allData, setAllData] = useState<any>([])
   const [filteredData,setFilteredData] = useState(allData)
 
   let cardMax: number = 20
@@ -13,13 +13,13 @@ const Homepage = (props: any) => {
   useEffect(() => {
     axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${cardMax}&offset=0`)
     .then((res) => {
-      const api = res.data;
+      const api = res.data
       getPokemonData(api.results)
     })
   }, [])
 
   const getPokemonData = async (result: any) => {
-    const pokemonArr: any = [];
+    const pokemonArr: any = []
     await Promise.all(
       result.map((pokemonItem: any) => {
         return axios
@@ -28,7 +28,7 @@ const Homepage = (props: any) => {
             pokemonArr.push(result.data)
           })
         })
-    );
+    )
     pokemonArr.sort((a: any, b: any) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0))
     setAllData(pokemonArr)
     setFilteredData(pokemonArr)
@@ -92,7 +92,6 @@ const Homepage = (props: any) => {
                       bgCard: 'bg-purple'
                     }
                   ]} 
-                  isFav={false}
                 />
               </div> 
             ))
@@ -100,7 +99,7 @@ const Homepage = (props: any) => {
         </div> 
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Homepage;
+export default Homepage

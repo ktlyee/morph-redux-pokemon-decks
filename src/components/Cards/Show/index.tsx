@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import { useAppDispatch } from "../../../app/hooks";
-import './cardShow.css'
-import { InformationCircleIcon, HeartIcon } from "@heroicons/react/solid";
-import CardInfo from "../CardInfo";
-import { addFavorite, removeFavorite } from "../../../reducers/favorite";
+import React, { useState, useEffect } from 'react'
+import { InformationCircleIcon, HeartIcon } from '@heroicons/react/solid'
 
-export interface Idata {
+import { useAppDispatch, useAppSelector } from '../../../app/hooks'
+import { addFavorite, removeFavorite } from '../../../reducers/favorite'
+import CardInfo from '../CardInfo'
+import './cardShow.css'
+
+interface Idata {
   id: string
   name: string
   imageUrl: string
@@ -13,9 +14,8 @@ export interface Idata {
   key?: string
 }
 
-export interface CardShowProp {
+interface CardShowProp {
   showData: Idata[]
-  isFav: boolean
 }
 
 interface IHandleFavorite {
@@ -23,10 +23,26 @@ interface IHandleFavorite {
   image: string
 }
 
-const CardShow = ({ showData, isFav }: CardShowProp) => {
-  const dispatch = useAppDispatch()
+const CardShow = ({ showData }: CardShowProp) => {
   const [openCard, setOpenCard] = useState(false)
-  const [favoriteCard, setFavoriteCard] = useState(isFav)
+  const [favoriteCard, setFavoriteCard] = useState(false)
+
+  const favorite = useAppSelector(state => state.favorite)
+  const favoriteKey: any = Object.keys(favorite)
+
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    checkFavoriteCards()
+  }, [])
+
+  const checkFavoriteCards = () => {
+      favoriteKey.forEach((index: number) => {
+      if(favorite[index].name === showData[0].name) {
+        return setFavoriteCard(true)           
+      }
+    })
+  }
 
   const handleFavorite = (pokemon: IHandleFavorite) => {
       dispatch(addFavorite(pokemon))
@@ -35,7 +51,6 @@ const CardShow = ({ showData, isFav }: CardShowProp) => {
 
   const handleRemoveFavorite = (key: string) => {
     dispatch(removeFavorite(key))
-    // setFavoriteCard(false)
   }
 
   return (
@@ -77,7 +92,7 @@ const CardShow = ({ showData, isFav }: CardShowProp) => {
         </>      
       ))}
     </ul>
-  );
-};
+  )
+}
 
-export default CardShow;
+export default CardShow
