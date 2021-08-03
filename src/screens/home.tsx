@@ -1,19 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { SearchIcon, HeartIcon } from "@heroicons/react/solid";
 import axios from "axios";
+import ReactPaginate from 'react-paginate';
 
-import { InputWithChild, CardShow, Button, Navbar } from "../components";
+import { InputWithChild, CardShow, Button, Navbar, Pagination } from "../components";
+import '../styles/home.css'
 
 const Homepage = (props: any) => {
   const [allData, setAllData] = useState([])
   const [filteredData,setFilteredData] = useState(allData)
+  const [offset, setOffset] = useState(0)
+  const [limitCard, setLimitCard] = useState<number>(20)
+  const [currentPage, setCurrentPage] = useState(0)
+  const [pageCount, setPageCount] = useState<number>(0)
 
   let cardMax: number = 20
 
   useEffect(() => {
-    axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${cardMax}&offset=0`)
+    axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${limitCard}&offset=${offset}`)
     .then((res) => {
       const api = res.data;
+      setPageCount(Math.ceil(api.count / limitCard))
       getPokemonData(api.results)
     })
   }, [])
@@ -24,14 +31,17 @@ const Homepage = (props: any) => {
       result.map((pokemonItem: any) => {
         return axios
           .get(`https://pokeapi.co/api/v2/pokemon/${pokemonItem.name}`)
-          .then((result) => {
+          .then((result: any) => {
             pokemonArr.push(result.data)
           })
         })
-    );
+    )
     pokemonArr.sort((a: any, b: any) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0))
-    setAllData(pokemonArr)
-    setFilteredData(pokemonArr)
+    const slice = pokemonArr.slice(offset, offset + limitCard)
+    setAllData(slice)
+    setFilteredData(slice)
+    // setAllData(pokemonArr)
+    // setFilteredData(pokemonArr)
   }
 
   const handleSearch = (event: any) => {
@@ -41,6 +51,14 @@ const Homepage = (props: any) => {
         return data.name.search(value) != -1
     })
     setFilteredData(result)
+  }
+
+  const handlePageClick = (e: any) => {
+    const selectedPage = e.selected
+    const offset = selectedPage * limitCard
+
+    setCurrentPage(selectedPage)
+    setOffset(offset)
   }
 
   return (
@@ -98,6 +116,21 @@ const Homepage = (props: any) => {
             ))
           }
         </div> 
+      </div>
+      <div>
+        <ReactPaginate
+          previousLabel={"prev"}
+          nextLabel={"next"}
+          breakLabel={"..."}
+          breakClassName={"break-me"}
+          pageCount={pageCount}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={handlePageClick}
+          containerClassName={"pagination"}
+          // subContainerClassName={"pages pagination"}
+          activeClassName={"active"}
+        />
       </div>
     </>
   );
