@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useAppSelector } from '../../app/hooks'
 import Avatar from '../Avatar'
 import Toggle from '../Toggle'
@@ -15,11 +16,13 @@ const Navbar = () => {
           <Toggle enabled={enabled} setEnabled={() => setEnabled(!enabled)} />
         </div>
         <div>
-          <img
-            className="h-auto w-72 ml-36"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1280px-International_Pok%C3%A9mon_logo.svg.png"
-            alt="pokemon-logo"
-          />
+          <Link to='/home'>
+            <img
+              className="h-auto w-72 ml-36"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1280px-International_Pok%C3%A9mon_logo.svg.png"
+              alt="pokemon-logo"
+            />
+          </Link>
         </div>
         <div className="p-5 bg-white col-end-7 col-span-2">
           <Avatar
