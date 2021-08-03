@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { SearchIcon, HeartIcon } from "@heroicons/react/solid";
-import { useAppSelector } from "../app/hooks";
 import axios from "axios";
 
 import { InputWithChild, CardShow, Button, Navbar } from "../components";
