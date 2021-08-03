@@ -20,7 +20,7 @@ const CardShow = ({showData, handleFav}: CardShowProp) => {
   const [openCard, setOpenCard] = useState(false)
 
   return (
-    <ul className="card-show">
+    <ul className="card-show" onClick={() => setOpenCard(true)}>
       {showData.map((showData) => (
         <>
           {
