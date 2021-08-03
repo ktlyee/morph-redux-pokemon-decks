@@ -11,7 +11,7 @@ const FavoritePage = () => {
             <Navbar />
             <div className='mt-12'>
                 <h2 className='font-quicksand text-xl font-bold text-left ml-36'>Your Favorite Cards</h2>
-                <div className='mt-12 mb-14 ml-60'>
+                <div className='mt-14 mb-14 ml-60'>
                     <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
                         {
                             favoriteKey.map((key, index: number) => (
@@ -23,8 +23,7 @@ const FavoritePage = () => {
                                                 name: `${favorite[key].name}`, 
                                                 imageUrl: `${favorite[key].image}`, 
                                                 bgCard: 'bg-purple', 
-                                                key: `${key}`, 
-                                                // isFav: favorite[key].isFav 
+                                                key: `${key}`
                                             }
                                         ]}
                                         isFav={true} 

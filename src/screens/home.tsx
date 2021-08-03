@@ -9,9 +9,6 @@ const Homepage = (props: any) => {
   const [allData, setAllData] = useState([])
   const [filteredData,setFilteredData] = useState(allData)
 
-  const favorite = useAppSelector(state => state.favorite)
-  const favoriteKey = Object.keys(favorite)
-
   let cardMax: number = 20
 
   useEffect(() => {
@@ -30,8 +27,7 @@ const Homepage = (props: any) => {
           .get(`https://pokeapi.co/api/v2/pokemon/${pokemonItem.name}`)
           .then((result) => {
             pokemonArr.push(result.data)
-            // checkFavoriteCard(pokemonItem.name)
-          });
+          })
         })
     );
     setAllData(pokemonArr)
@@ -46,17 +42,6 @@ const Homepage = (props: any) => {
     })
     setFilteredData(result)
   }
-
-  // const checkFavoriteCard = (pokemonName: string) => {
-  //   {
-  //     favoriteKey.map((key) => {
-  //       if(favorite[key].name === pokemonName) {
-  //         setIsFavCard(true)
-  //       }
-  //       setIsFavCard(false)
-  //     })
-  //   }
-  // }
 
   return (
     <>
