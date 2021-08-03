@@ -20,7 +20,7 @@ const CardShow = ({showData, handleFav}: CardShowProp) => {
   const [openCard, setOpenCard] = useState(false)
 
   return (
-    <ul className="card-show" onClick={() => setOpenCard(true)}>
+    <ul className="card-show">
       {showData.map((showData) => (
         <>
           {
@@ -41,7 +41,7 @@ const CardShow = ({showData, handleFav}: CardShowProp) => {
                 </button>
               </div>
             </div>
-            <div className="flex-1 flex flex-col p-7">
+            <div className="flex-1 flex flex-col p-7" onClick={() => setOpenCard(true)}>
               <img
                 className="w-36 h-36 flex-shrink-0 mx-auto bg-black rounded-md"
                 src={showData.imageUrl}
