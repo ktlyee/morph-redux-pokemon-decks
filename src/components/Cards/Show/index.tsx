@@ -35,6 +35,7 @@ const CardShow = ({ showData, isFav }: CardShowProp) => {
 
   const handleRemoveFavorite = (key: string) => {
     dispatch(removeFavorite(key))
+    // setFavoriteCard(false)
   }
 
   return (
@@ -55,11 +56,11 @@ const CardShow = ({ showData, isFav }: CardShowProp) => {
                   <InformationCircleIcon className="h-7 w-7 text-blue-darkest hover:text-blue"/>
                 </button>
                 <button className="-ml-px w-0 flex-1 flex flex-row-reverse p-2" onClick={() => favoriteCard ? handleRemoveFavorite(`${showData.key}`) : handleFavorite({name: showData.name, image: showData.imageUrl})}>
-                  <HeartIcon className={`h-7 w-7 ${favoriteCard ? 'text-red-dark hover:text-red' : ''}`}/>
+                  <HeartIcon className={`h-7 w-7 ${favoriteCard ? 'text-red' : 'text-blue-darkest hover:text-red-dark'}`}/>
                 </button> 
               </div>
             </div>
-            <div className="flex-1 flex flex-col p-7">
+            <div className="flex-1 flex flex-col p-7" onClick={() => setOpenCard(true)}>
               <img
                 className="w-36 h-36 flex-shrink-0 mx-auto bg-black rounded-md"
                 src={showData.imageUrl}

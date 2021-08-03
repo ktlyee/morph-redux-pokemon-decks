@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { SearchIcon, HeartIcon } from "@heroicons/react/solid";
 import { useAppSelector } from "../app/hooks";
-import "../styles/home.css";
 import axios from "axios";
 
-import { Avatar, InputWithChild, Toggle, CardShow, Button } from "../components";
+import { InputWithChild, CardShow, Button, Navbar } from "../components";
 
 const Homepage = (props: any) => {
-  const [enabled, setEnabled] = useState(false)
   const [allData, setAllData] = useState([])
   const [filteredData,setFilteredData] = useState(allData)
-  const user = useAppSelector(state => state.auth)
+
   const favorite = useAppSelector(state => state.favorite)
   const favoriteKey = Object.keys(favorite)
-  const [isFavCard, setIsFavCard] = useState(false)
 
   let cardMax: number = 20
 
@@ -63,26 +60,7 @@ const Homepage = (props: any) => {
 
   return (
     <>
-      <header className="Home-header grid grid-cols-1">
-        <div className="p-5 col-start-1">
-          <Toggle enabled={enabled} setEnabled={() => setEnabled(!enabled)} />
-        </div>
-        <div>
-          <img
-            className="h-auto w-72 ml-36"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1280px-International_Pok%C3%A9mon_logo.svg.png"
-            alt="pokemon-logo"
-          />
-        </div>
-        <div className="p-5 bg-white col-end-7 col-span-2">
-          <Avatar
-            href="#"
-            src="https://www.slot1234.com/asset/web/images/icon/icon-default-avatar.png"
-            text={{ text: "Welcome!", textColor: "text-blue font-bold" }}
-            name={{ text: `${user.username}`, textColor: "text-blue font-bold" }}
-          />
-        </div>
-      </header>
+      <Navbar />
       <div className="relative inline-flex bg-white w-full">
         <div className="w-full max-w-xs absolute left-36 top-3">
           <InputWithChild
