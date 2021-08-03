@@ -11,6 +11,9 @@ const Homepage = (props: any) => {
   const [allData, setAllData] = useState([])
   const [filteredData,setFilteredData] = useState(allData)
   const user = useAppSelector(state => state.auth)
+  const favorite = useAppSelector(state => state.favorite)
+  const favoriteKey = Object.keys(favorite)
+  const [isFavCard, setIsFavCard] = useState(false)
 
   let cardMax: number = 20
 
@@ -30,6 +33,7 @@ const Homepage = (props: any) => {
           .get(`https://pokeapi.co/api/v2/pokemon/${pokemonItem.name}`)
           .then((result) => {
             pokemonArr.push(result.data)
+            // checkFavoriteCard(pokemonItem.name)
           });
         })
     );
@@ -45,6 +49,17 @@ const Homepage = (props: any) => {
     })
     setFilteredData(result)
   }
+
+  // const checkFavoriteCard = (pokemonName: string) => {
+  //   {
+  //     favoriteKey.map((key) => {
+  //       if(favorite[key].name === pokemonName) {
+  //         setIsFavCard(true)
+  //       }
+  //       setIsFavCard(false)
+  //     })
+  //   }
+  // }
 
   return (
     <>
@@ -107,9 +122,14 @@ const Homepage = (props: any) => {
               <div key={index}>
                 <CardShow 
                   showData={[
-                    { id: `${index}`, name: `${data.name}`, imageUrl: `${data.sprites.other.dream_world.front_default}`, bgCard: 'bg-purple' }
+                    { 
+                      id: `${index}`, 
+                      name: `${data.name}`, 
+                      imageUrl: `${data.sprites.other.dream_world.front_default}`, 
+                      bgCard: 'bg-purple'
+                    }
                   ]} 
-                  // handleFav={() => handleFavorite(`${data.name}`)} 
+                  isFav={false}
                 />
               </div> 
             ))

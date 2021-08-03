@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { useAppDispatch } from "../../../app/hooks";
 import './cardShow.css'
-import { InformationCircleIcon, HeartIcon, XCircleIcon } from "@heroicons/react/solid";
+import { InformationCircleIcon, HeartIcon } from "@heroicons/react/solid";
 import CardInfo from "../CardInfo";
 import { addFavorite, removeFavorite } from "../../../reducers/favorite";
 
 export interface Idata {
   id: string
   name: string
-  fav?: boolean
   imageUrl: string
   bgCard: string
   key?: string
@@ -16,23 +15,22 @@ export interface Idata {
 
 export interface CardShowProp {
   showData: Idata[]
-  handleFav?: () => void
+  isFav: boolean
 }
 
 interface IHandleFavorite {
   name: string
   image: string
-  isFav: boolean
 }
 
-const CardShow = ({showData, handleFav}: CardShowProp) => {
+const CardShow = ({ showData, isFav }: CardShowProp) => {
   const dispatch = useAppDispatch()
   const [openCard, setOpenCard] = useState(false)
-  const [isFav, setIsFav] = useState(false)
+  const [favoriteCard, setFavoriteCard] = useState(isFav)
 
   const handleFavorite = (pokemon: IHandleFavorite) => {
       dispatch(addFavorite(pokemon))
-      setIsFav(true)
+      setFavoriteCard(true)
   }
 
   const handleRemoveFavorite = (key: string) => {
@@ -56,18 +54,9 @@ const CardShow = ({showData, handleFav}: CardShowProp) => {
                 <button className="w-0 flex-1 flex p-2" onClick={() => setOpenCard(true)}>
                   <InformationCircleIcon className="h-7 w-7 text-blue-darkest hover:text-blue"/>
                 </button>
-                {/* <button className="-ml-px w-0 flex-1 flex flex-row-reverse p-2" onClick={() => handleFavorite({name: showData.name, image: showData.imageUrl, isFav: true})}>
-                  <HeartIcon className={`h-7 w-7 ${isFav? 'text-red-dark hover:text-red' : ''}`}/>
-                </button> */}
-                {
-                  showData.fav ?
-                  <button className="-ml-px w-0 flex-1 flex flex-row-reverse p-2" onClick={() => handleRemoveFavorite(`${showData.key}`)}>
-                    <XCircleIcon className='h-7 w-7'/>
-                  </button> :
-                  <button className="-ml-px w-0 flex-1 flex flex-row-reverse p-2" onClick={() => handleFavorite({name: showData.name, image: showData.imageUrl, isFav: true})}>
-                    <HeartIcon className={`h-7 w-7 ${isFav? 'text-red-dark hover:text-red' : ''}`}/>
-                  </button>
-                }
+                <button className="-ml-px w-0 flex-1 flex flex-row-reverse p-2" onClick={() => favoriteCard ? handleRemoveFavorite(`${showData.key}`) : handleFavorite({name: showData.name, image: showData.imageUrl})}>
+                  <HeartIcon className={`h-7 w-7 ${favoriteCard ? 'text-red-dark hover:text-red' : ''}`}/>
+                </button> 
               </div>
             </div>
             <div className="flex-1 flex flex-col p-7">
@@ -76,7 +65,7 @@ const CardShow = ({showData, handleFav}: CardShowProp) => {
                 src={showData.imageUrl}
                 alt=""
               />
-              <h3 className="mt-6 text-gray-900 font-press-start text-sm font-medium">
+              <h3 className="mt-6 text-gray-900 font-press-start text-sm font-medium capitalize ">
                 {showData.name}
               </h3>
               <h3 className="mt-4 text-gray-900 font-quicksand text-base font-medium">
