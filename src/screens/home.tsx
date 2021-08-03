@@ -11,7 +11,7 @@ const Homepage = (props: any) => {
   let cardMax: number = 20
 
   useEffect(() => {
-    axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${cardMax}&offset=1`)
+    axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${cardMax}&offset=0`)
     .then((res) => {
       const api = res.data;
       getPokemonData(api.results)
@@ -29,6 +29,7 @@ const Homepage = (props: any) => {
           })
         })
     );
+    pokemonArr.sort((a: any, b: any) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0))
     setAllData(pokemonArr)
     setFilteredData(pokemonArr)
   }
