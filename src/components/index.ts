@@ -15,3 +15,5 @@ export { default as Toggle } from './Toggle'
 export { default as CardInfo } from './Cards/CardInfo'
 
 export { default as CardShow } from './Cards/Show'
+
+export { default as Navbar } from './Navbar'

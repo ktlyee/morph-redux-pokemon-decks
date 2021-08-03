@@ -1,22 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useAppSelector } from '../../app/hooks'
 import Avatar from '../Avatar'
 import Toggle from '../Toggle'
 import './navbar.css'
 
-interface IToggle {
-    enabled: boolean
-    setEnabled: () => void
-}
+const Navbar = () => {
+  const [enabled, setEnabled] = useState<boolean>(false)
+  
+  const user = useAppSelector(state => state.auth)
 
-interface NavbarProps {
-    username: string
-    toggle: IToggle
-}
-
-const Navbar = ({ username, toggle }: NavbarProps) => (
+ return (
     <header className="Home-header grid grid-cols-1">
         <div className="p-5 col-start-1">
-          <Toggle enabled={toggle.enabled} setEnabled={toggle.setEnabled} />
+          <Toggle enabled={enabled} setEnabled={() => setEnabled(!enabled)} />
         </div>
         <div>
           <img
@@ -30,10 +26,11 @@ const Navbar = ({ username, toggle }: NavbarProps) => (
             href="#"
             src="https://www.slot1234.com/asset/web/images/icon/icon-default-avatar.png"
             text={{ text: "Welcome!", textColor: "text-blue font-bold" }}
-            name={{ text: `${username}`, textColor: "text-blue font-bold" }}
+            name={{ text: `${user.username}`, textColor: "text-blue font-bold" }}
           />
         </div>
     </header>
-)
+  )
+}
 
 export default Navbar
