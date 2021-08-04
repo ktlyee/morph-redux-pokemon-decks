@@ -12,6 +12,8 @@ export { default as Pagination } from './Pagination'
 
 export { default as Toggle } from './Toggle'
 
-export { default as InfoCard } from './Cards/InfoCard'
+export { default as CardInfo } from './Cards/CardInfo'
 
 export { default as CardShow } from './Cards/Show'
+
+export { default as Navbar } from './Navbar'

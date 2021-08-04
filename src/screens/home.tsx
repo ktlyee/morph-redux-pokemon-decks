@@ -1,99 +1,105 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { QuestionMarkCircleIcon } from "@heroicons/react/solid";
+import React, { useEffect, useState } from 'react'
+import { SearchIcon, HeartIcon } from '@heroicons/react/solid'
+import axios from 'axios'
 
-import { Avatar, InputWithChild, Toggle, CardShow, Pagination } from "../components";
-import { pokemon } from "../testComponent";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import "../styles/home.css";
+import { InputWithChild, CardShow, Button, Navbar } from '../components'
 
-const goInfo = () => {
-  return console.log("click Info");
-};
+const Homepage = (props: any) => {
+  const [allData, setAllData] = useState<any>([])
+  const [filteredData,setFilteredData] = useState(allData)
 
-const clickFav = () => {
-  return console.log("click Fav");
-};
+  let cardMax: number = 20
 
-const handleClick = ({}) => {
-  axios.get("https://pokeapi.co/api/v2/pokemon?limit=6&offset=1").then((res) => {
-    console.log(res.data);
-    console.log(res.data.results);
-  }) 
-}
+  useEffect(() => {
+    axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${cardMax}&offset=0`)
+    .then((res) => {
+      const api = res.data
+      getPokemonData(api.results)
+    })
+  }, [])
 
-const Homepage = () => {
-  const [enabled, setEnabled] = useState(false);
+  const getPokemonData = async (result: any) => {
+    const pokemonArr: any = []
+    await Promise.all(
+      result.map((pokemonItem: any) => {
+        return axios
+          .get(`https://pokeapi.co/api/v2/pokemon/${pokemonItem.name}`)
+          .then((result) => {
+            pokemonArr.push(result.data)
+          })
+        })
+    )
+    pokemonArr.sort((a: any, b: any) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0))
+    setAllData(pokemonArr)
+    setFilteredData(pokemonArr)
+  }
 
-  const user = useAppSelector(state => state.auth)
-  
+  const handleSearch = (event: any) => {
+    let value = event.target.value.toLowerCase()
+    let result = []
+    result = allData.filter((data: any) => {
+        return data.name.search(value) != -1
+    })
+    setFilteredData(result)
+  }
+
   return (
     <>
-      <header className="Home-header grid grid-cols-1">
-        <div className="p-5 col-start-1">
-          <Toggle enabled={enabled} setEnabled={() => setEnabled(!enabled)} />
-        </div>
-        <div>
-          <img
-            className="h-auto w-72 ml-36"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1280px-International_Pok%C3%A9mon_logo.svg.png"
-            alt="pokemon-logo"
-          />
-        </div>
-        <div className="p-5 bg-white col-end-7 col-span-2">
-          <Avatar
-            href="#"
-            src={user.avatar? user.avatar : "https://www.slot1234.com/asset/web/images/icon/icon-default-avatar.png"}
-            text={{ text: "Welcome!", textColor: "text-blue font-bold" }}
-            name={{ text: `${user.username}`, textColor: "text-blue font-bold" }}
-          />
-        </div>
-      </header>
-      <div className="p-3 flex items-start justify-start bg-white">
-        <div className="w-full max-w-xs ml-32">
+      <Navbar />
+      <div className="relative inline-flex bg-white w-full">
+        <div className="w-full max-w-xs absolute left-36 top-3">
           <InputWithChild
             input={{
               type: "text",
-              name: "text",
-              id: "Input",
+              name: "search",
+              id: "search",
               placeholder: "",
               style: "border-blue p-3 text-blue-darkest",
               focusStyle:
                 "focus:ring-2 focus:ring-blue-darkest focus:border-blue-dark",
             }}
-            isCheckValid={false}
-            CheckValidation={{
-              ariaInvalid: false,
-              defaultValue: "asdfgg",
-              ariaDescribedby: "input-error",
-            }}
-            invalidText={{
-              text: "Invalid search",
-              style: "mt-2 text-sm text-red",
-              id: "input-error",
-            }}
-            RigthChild={
-              <button className="absolute inset-y-0 right-0 pt-1 pr-3 flex items-center cursor-pointer">
-                <a href="#" onClick={handleClick}>
-                  <QuestionMarkCircleIcon
-                    className="w-7 h-7 text-blue-dark"
-                    aria-hidden="true"
-                  />
-                </a>
-              </button>
+            RightChild={
+              <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+                <SearchIcon className="w-5 h-5 text-blue-dark" aria-hidden="true" />
+              </div>
             }
+            onChange={(event) => handleSearch(event)}
+          />
+        </div>
+        <div className='absolute top-6 right-32'>
+          <Button 
+            type='button'
+            text={{ text: 'Favorite Cards', color: 'text-yellow-light font-medium' }}
+            icon={{ icon: <HeartIcon />, color: 'text-yellow-light' }}
+            buttonColor='bg-blue-dark'
+            borderColor='rounded-lg'
+            hoverButton='hover:bg-blue'
+            handleClick={() => props.history.push('/favorite')}
           />
         </div>
       </div>
-      <div className="p-14 mb-14">
-        <CardShow showData={pokemon} handleInfo={goInfo} handleFav={clickFav} />
-      </div>
-      <p>{user.email}</p>
-      <div>
-          {/* <Pagination pages={[{pageNumber: 1, href: "", currentPage: true }]} text={} borderColor="" activePage={} prevButton={} nextButton={}/> */}
+      <div className="mt-28 mb-14 ml-60">
+        <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+          {
+            filteredData.map((data: any, index: number) => (
+              <div key={index}>
+                <CardShow 
+                  showData={[
+                    { 
+                      id: `${index}`, 
+                      name: `${data.name}`, 
+                      imageUrl: `${data.sprites.other.dream_world.front_default}`, 
+                      bgCard: 'bg-purple'
+                    }
+                  ]} 
+                />
+              </div> 
+            ))
+          }
+        </div> 
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Homepage;
+export default Homepage
