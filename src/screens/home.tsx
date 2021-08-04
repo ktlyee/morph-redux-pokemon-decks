@@ -3,17 +3,14 @@ import { SearchIcon, HeartIcon, ArrowNarrowLeftIcon, ArrowNarrowRightIcon } from
 import axios from "axios";
 import ReactPaginate from 'react-paginate';
 
-import { InputWithChild, CardShow, Button, Navbar, Pagination } from "../components";
+import { InputWithChild, CardShow, Button, Navbar } from "../components";
 
 const Homepage = (props: any) => {
   const [allData, setAllData] = useState([])
   const [filteredData,setFilteredData] = useState(allData)
   const [offset, setOffset] = useState(0)
-  const [limitCard, setLimitCard] = useState<number>(20)
-  const [currentPage, setCurrentPage] = useState(0)
   const [pageCount, setPageCount] = useState<number>(0)
-
-  let cardMax: number = 20
+  let limitCard = 20
 
   useEffect(() => {
     axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${limitCard}&offset=${offset}`)
@@ -36,11 +33,11 @@ const Homepage = (props: any) => {
         })
     )
     pokemonArr.sort((a: any, b: any) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0))
+    setAllData(pokemonArr)
+    setFilteredData(pokemonArr)
     // const slice = pokemonArr.slice(offset, offset + limitCard)
     // setAllData(slice)
     // setFilteredData(slice)
-    setAllData(pokemonArr)
-    setFilteredData(pokemonArr)
   }
 
   const handleSearch = (event: any) => {
@@ -56,7 +53,6 @@ const Homepage = (props: any) => {
     const selectedPage = e.selected
     const offset = selectedPage * limitCard
 
-    setCurrentPage(selectedPage)
     setOffset(offset)
   }
 
@@ -116,7 +112,7 @@ const Homepage = (props: any) => {
           }
         </div> 
       </div>
-      <div>
+      <div className='mx-28 my-12'>
         <ReactPaginate
           pageCount={pageCount}
           pageRangeDisplayed={2}
@@ -142,8 +138,8 @@ const Homepage = (props: any) => {
           breakClassName={'text-gray-500 pt-3 px-4'}
           containerClassName={'border-t border-gray-200 px-4 flex items-center justify-between sm:px-0'}
           pageClassName={'hidden md:-mt-px md:flex'}
-          pageLinkClassName={'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-t-2 pt-4 px-4 inline-flex items-center text-sm font-medium'}
-          activeLinkClassName={'border-indigo-500 text-indigo-600 border-t-2 pt-4 px-4 inline-flex items-center text-sm font-medium'}
+          pageLinkClassName={'border-transparent font-medium hover:text-gray-700 hover:border-gray-300 border-t-2 pt-4 px-4 inline-flex items-center text-sm'}
+          activeLinkClassName={'border-blue text-blue border-t-2 pt-4 px-4 inline-flex items-center text-sm font-semibold'}
         />
       </div>
     </>
