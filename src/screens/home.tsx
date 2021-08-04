@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { SearchIcon, HeartIcon } from "@heroicons/react/solid";
+import { SearchIcon, HeartIcon, ArrowNarrowLeftIcon, ArrowNarrowRightIcon } from "@heroicons/react/solid";
 import axios from "axios";
 import ReactPaginate from 'react-paginate';
 
 import { InputWithChild, CardShow, Button, Navbar, Pagination } from "../components";
-import '../styles/home.css'
 
 const Homepage = (props: any) => {
   const [allData, setAllData] = useState([])
@@ -37,11 +36,11 @@ const Homepage = (props: any) => {
         })
     )
     pokemonArr.sort((a: any, b: any) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0))
-    const slice = pokemonArr.slice(offset, offset + limitCard)
-    setAllData(slice)
-    setFilteredData(slice)
-    // setAllData(pokemonArr)
-    // setFilteredData(pokemonArr)
+    // const slice = pokemonArr.slice(offset, offset + limitCard)
+    // setAllData(slice)
+    // setFilteredData(slice)
+    setAllData(pokemonArr)
+    setFilteredData(pokemonArr)
   }
 
   const handleSearch = (event: any) => {
@@ -106,7 +105,7 @@ const Homepage = (props: any) => {
                     { 
                       id: `${index}`, 
                       name: `${data.name}`, 
-                      imageUrl: `${data.sprites.other.dream_world.front_default}`, 
+                      imageUrl: data.sprites.other.dream_world.front_default ? `${data.sprites.other.dream_world.front_default}` : `${data.sprites.front_default}`, 
                       bgCard: 'bg-purple'
                     }
                   ]} 
@@ -119,17 +118,32 @@ const Homepage = (props: any) => {
       </div>
       <div>
         <ReactPaginate
-          previousLabel={"prev"}
-          nextLabel={"next"}
-          breakLabel={"..."}
-          breakClassName={"break-me"}
           pageCount={pageCount}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
+          pageRangeDisplayed={2}
+          marginPagesDisplayed={5}
+          initialPage={0}
           onPageChange={handlePageClick}
-          containerClassName={"pagination"}
-          // subContainerClassName={"pages pagination"}
-          activeClassName={"active"}
+          previousLabel={
+              <>
+                  <ArrowNarrowLeftIcon className="mr-3 h-5 w-5 text-gray-400" aria-hidden="true" />
+                  Previous
+              </>
+          }
+          previousClassName={'-mt-px w-0 flex-1 flex'}
+          previousLinkClassName={'border-t-2 border-transparent pt-4 pr-1 inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300'}
+          nextLabel={
+              <>
+                  Next
+                  <ArrowNarrowRightIcon className="ml-3 h-5 w-5 text-gray-400" aria-hidden="true" />
+              </>
+          }
+          nextClassName={'-mt-px w-0 flex-1 flex justify-end'}
+          nextLinkClassName={'border-t-2 border-transparent pt-4 pl-1 inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300'}
+          breakClassName={'text-gray-500 pt-3 px-4'}
+          containerClassName={'border-t border-gray-200 px-4 flex items-center justify-between sm:px-0'}
+          pageClassName={'hidden md:-mt-px md:flex'}
+          pageLinkClassName={'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-t-2 pt-4 px-4 inline-flex items-center text-sm font-medium'}
+          activeLinkClassName={'border-indigo-500 text-indigo-600 border-t-2 pt-4 px-4 inline-flex items-center text-sm font-medium'}
         />
       </div>
     </>
